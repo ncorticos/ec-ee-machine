@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  Quizzes Machine 1.19.0 — 2026-10-10 09:30 (Lisbon)
+  EC&EE Machine 1.20.0 — 2026-10-12 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 576 perguntas extraídas das aulas PPTX L.00–L.03.
 
@@ -13,8 +13,8 @@
   Settings > Pages > Deploy from branch. Não precisa de build nem servidor.
   Também funciona offline aberto como ficheiro (file://).
 -->
-<title>Quizzes Machine — Environmental Comfort & Energy Efficiency</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%2314171a'/><text x='32' y='42' font-family='Arial,Helvetica,sans-serif' font-size='25' font-weight='700' fill='%23fff' text-anchor='middle'>QM</text></svg>">
+<title>EC&amp;EE—Machine — Environmental Comfort &amp; Energy Efficiency</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23232a52'/><g stroke-linecap='round' fill='none' stroke-width='7'><path d='M21 33 L29 18' stroke='#35d07f'/><path d='M35 18 L43 33' stroke='#2ea8f2'/><path d='M22 45 L42 45' stroke='#ffd21f'/></g><g><circle cx='32' cy='11' r='7' fill='#35d07f'/><circle cx='47' cy='38' r='7' fill='#2ea8f2'/><circle cx='17' cy='38' r='7' fill='#ffd21f'/></g></svg>">
 <style>
 :root{
   --bg:#ffffff; --panel:#ffffff; --ink:#14171a; --ink2:#3d444b;
@@ -178,7 +178,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
 <body>
 <header>
   <div class="hbar">
-    <div class="brand"><b>Quizzes Machine</b><span data-t="brandsub">Environmental Comfort &amp; Energy Efficiency</span></div>
+    <div class="brand"><b>EC&amp;EE Machine</b><span data-t="brandsub">Environmental Comfort &amp; Energy Efficiency</span></div>
     <div class="kindsel" role="group" id="kindsel">
       <button type="button" data-kind="theory" aria-pressed="true">Theoretical</button>
       <button type="button" data-kind="lab" aria-pressed="false">LAB</button>
@@ -196,7 +196,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.19.0 · 2026-10-10 09:30</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.20.0 · 2026-10-12</span></footer>
 </main>
 <script>
 "use strict";
@@ -246,7 +246,7 @@ pt:{
  bankLocked:"Banco bloqueado — introduza o código do professor para ver as perguntas e respostas.",
  foot:"Banco extraído das aulas L.00–L.03 · cada tentativa baralha perguntas e opções · ficheiro único, funciona offline e no GitHub Pages.",
  trH:"Tradução para português (Gemma)",
- trP:"Traduz o banco inglês desta aula para português europeu através do seu Cloudflare Worker (Workers AI, Gemma 4). Reveja e corrija a coluna em português, descarregue bank-pt.json e carregue-o no repositório quiz-machine (Add file > Upload files).",
+ trP:"Traduz o banco inglês desta aula para português europeu através do seu Cloudflare Worker (Workers AI, Gemma 4). Reveja e corrija a coluna em português, descarregue bank-pt.json e carregue-o no repositório ec-ee-machine (Add file > Upload files).",
  trCode:"Código do docente (Worker)", trGo:"Traduzir", trDl:"Descarregar bank-pt.json",
  trBusy:"A traduzir…", trDone:"Concluído — reveja a coluna em português e descarregue.",
  trFail:"Tradução interrompida — carregue em Traduzir para continuar.",
@@ -257,7 +257,7 @@ pt:{
  trRedo:"Traduzir esta aula de novo? As suas correções serão substituídas.",
  trLoaded:"Carregado de bank-pt.json — pode corrigir e descarregar de novo.",
  trEmpty:"Há campos em português vazios — preencha-os antes de descarregar.",
- trSaved:"bank-pt.json descarregado — carregue-o na raiz do repositório quiz-machine.",
+ trSaved:"bank-pt.json descarregado — carregue-o na raiz do repositório ec-ee-machine.",
  projDone:"Respondeu a todas as perguntas.", answered:"Respondidas",
  srvFail:"O Worker não conseguiu guardar o resultado — mostre esta mensagem ao docente",
  sendAgain:"Enviar de novo", codeRejected:"O Worker de resultados não aceita o código da turma — docente: acrescente-o a CLASS_CODE no Cloudflare:",
@@ -317,7 +317,7 @@ en:{
  bankLocked:"Bank locked — enter the teacher code to see the questions and answers.",
  foot:"Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.",
  trH:"Portuguese translation (Gemma)",
- trP:"Translates this lecture's English bank into European Portuguese through your Cloudflare Worker (Workers AI, Gemma 4). Review and correct the Portuguese column, download bank-pt.json and upload it to the quiz-machine repository (Add file > Upload files).",
+ trP:"Translates this lecture's English bank into European Portuguese through your Cloudflare Worker (Workers AI, Gemma 4). Review and correct the Portuguese column, download bank-pt.json and upload it to the ec-ee-machine repository (Add file > Upload files).",
  trCode:"Worker teacher code", trGo:"Translate", trDl:"Download bank-pt.json",
  trBusy:"Translating…", trDone:"Done — review the Portuguese column, then download.",
  trFail:"Translation stopped — press Translate to resume.",
@@ -328,7 +328,7 @@ en:{
  trRedo:"Translate this lecture again? Your corrections will be replaced.",
  trLoaded:"Loaded from bank-pt.json — you can correct it and download again.",
  trEmpty:"Some Portuguese fields are empty — fill them in before downloading.",
- trSaved:"bank-pt.json downloaded — upload it to the root of the quiz-machine repository.",
+ trSaved:"bank-pt.json downloaded — upload it to the root of the ec-ee-machine repository.",
  projDone:"You have answered all the questions.", answered:"Answered",
  srvFail:"The Worker could not save the result — show this message to your teacher",
  sendAgain:"Send again", codeRejected:"The results Worker does not accept the class code — teacher: add it to CLASS_CODE in Cloudflare:",
@@ -587,33 +587,55 @@ const LAB_N = 5, LAB_MAX = 10*1024*1024;
 const LAB_ITEMS = ["Context","Archetype","Envelope","EPC","L&A","Presentation"];
 const labSubName = k => `${k} · ${LAB_ITEMS[k-1]}`;
 const LAB_PROF = {architects:"Maja Sutkowska", engineers:"Nuno Dinis Cortiços"}; // lab professor per track
+let LABTRACK = (()=>{ // professor filter (?track=architects|engineers link, else this device's last choice)
+  const q=new URLSearchParams(location.search).get("track");
+  if(q==="architects"||q==="engineers") return q;
+  try{ const s=localStorage.getItem("qm_labtrack"); return (s==="architects"||s==="engineers")?s:""; }catch(e){ return ""; }
+})();
 let LABST = null; // {grp, open:[k], subs:{k:{date,kind,file,size,link}}} of the chosen group
 const labParse = v => { const m=/^(Architects|Engineers) · Group ([A-Z])\b/.exec(v||""); return m ? {track:m[1].toLowerCase(), g:m[2]} : null; };
 const fmtMB = b => (b>=1048576 ? (b/1048576).toFixed(1)+" MB" : Math.max(1,Math.round((b||0)/1024))+" kB");
 const safeLink = u => /^https:\/\/[^\s"<>]+$/i.test(u||"");
-function labGroupSelect(id, sel){
-  return `<select id="${id}"><option value="">—</option>${["architects","engineers"].map(tr=>`<optgroup label="${esc(t(tr==="architects"?"grpArch":"grpEng"))}">${
+function labGroupSelect(id, sel, onlyTrack){
+  const trs = onlyTrack ? [onlyTrack] : ["architects","engineers"];
+  return `<select id="${id}"><option value="">—</option>${trs.map(tr=>`<optgroup label="${esc(t(tr==="architects"?"grpArch":"grpEng"))}">${
     LAB_GROUPS[tr].map(([L,h])=>{ const v=labValue(tr,L,h); return `<option value="${esc(v)}"${v===sel?" selected":""}>${esc(labName(L,h))}</option>`; }).join("")}</optgroup>`).join("")}</select>`;
 }
 function renderLab(){
   let grp=""; try{ grp=localStorage.getItem("qm_lab")||""; }catch(e){}
   $("#pg-lab").innerHTML=`<div class="pagehead"><h2>${esc(t("labH"))}</h2><p>${esc(t("labP"))}</p></div>
     <div class="controls">
-      <span class="ctl"><label>${esc(t("labProf"))}</label><b id="l-prof"></b></span>
-      <span class="ctl"><label>${esc(t("labGroup"))}</label>${labGroupSelect("l-grp", grp)}</span>
+      <span class="ctl"><label>${esc(t("labProf"))}</label><select id="l-prof"><option value="">—</option><option value="architects"${LABTRACK==="architects"?" selected":""}>${esc(LAB_PROF.architects)}</option><option value="engineers"${LABTRACK==="engineers"?" selected":""}>${esc(LAB_PROF.engineers)}</option></select></span>
+      <span class="ctl"><label>${esc(t("labGroup"))}</label>${labGroupSelect("l-grp", grp, LABTRACK||undefined)}</span>
       <span class="hint" id="l-msg"></span>
     </div>
     <p class="labmem" id="l-members" hidden></p>
     <div id="l-slots"></div>`;
-  $("#l-grp").onchange=()=>{ try{ localStorage.setItem("qm_lab",$("#l-grp").value); }catch(e){} LABST=null; drawMembers(); loadLabStatus(); };
+  $("#l-prof").onchange=()=>{
+    LABTRACK=$("#l-prof").value;
+    try{ localStorage.setItem("qm_labtrack",LABTRACK); }catch(e){}
+    try{ // drop the group if it belongs to the other professor's track
+      const g=localStorage.getItem("qm_lab");
+      if(g){ const pp=labParse(g); if(pp && LABTRACK && pp.track!==LABTRACK) localStorage.removeItem("qm_lab"); }
+    }catch(e){}
+    LABST=null; renderLab();
+  };
+  $("#l-grp").onchange=()=>{
+    try{ localStorage.setItem("qm_lab",$("#l-grp").value); }catch(e){}
+    const p=labParse($("#l-grp").value);
+    if(p && p.track!==LABTRACK){ // group implies its professor: follow it
+      LABTRACK=p.track;
+      try{ localStorage.setItem("qm_labtrack",LABTRACK); }catch(e){}
+      LABST=null; renderLab(); return;
+    }
+    LABST=null; drawMembers(); loadLabStatus();
+  };
   drawMembers();
   if(LABST && LABST.grp===grp) drawLabSlots(); // last known state at once, then a fresh one (the teacher may have opened one)
   loadLabStatus();
 }
-function drawMembers(){ // the chosen group's professor and students, straight from LAB_PROF / LAB_GROUPS
+function drawMembers(){ // the chosen group's students, straight from LAB_GROUPS (professor shown by the selector)
   const el=$("#l-members"), p=labParse($("#l-grp").value); if(!el) return;
-  $("#l-prof").textContent = p ? LAB_PROF[p.track]
-    : `${t("grpArch")}: ${LAB_PROF.architects} · ${t("grpEng")}: ${LAB_PROF.engineers}`; // no group yet: both
   const g=p && (LAB_GROUPS[p.track]||[]).find(x=>x[0]===p.g), names=(g && g[2]) || [];
   el.hidden=!names.length;
   el.innerHTML=names.length ? `<span class="k">${esc(t("labMembers"))}</span>${names.map(esc).join(" · ")}` : "";
@@ -976,7 +998,7 @@ function renderProj(){
     const pe=profEmail(), msg=$("#p-reqmsg"), mail=$("#p-mail");
     let nm="",kg="";
     try{ nm=localStorage.getItem("qm_name")||""; kg=localStorage.getItem("qm_group")||""; }catch(e){}
-    const subj=`[Quizzes Machine] Restart request — ${nm||"?"} (${kg||"?"})`;
+    const subj=`[EC&EE Machine] Restart request — ${nm||"?"} (${kg||"?"})`;
     const body=`${LESSON[LANG][P.lesson]} · ${BANK_YEAR}
 ${t("thName")}: ${nm}
 ${t("klass")}: ${kg}
@@ -1194,7 +1216,7 @@ function trDownload(){
     else if(PTX[k]) banks[k]=PTX[k];
   });
   if(Object.entries(banks).some(([k,L])=>!L.every((it,i)=>ptItemOK(it,BANKS.en[k][i])))){ trSay(t("trEmpty")); return; }
-  const body=JSON.stringify({format:"quiz-machine-bank-pt", version:1, model:TRMODEL||"@cf/google/gemma-4-26b-a4b-it",
+  const body=JSON.stringify({format:"ec-ee-machine-bank-pt", version:1, model:TRMODEL||"@cf/google/gemma-4-26b-a4b-it",
     updated:new Date().toISOString(), banks}, null, 1);
   const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([body],{type:"application/json"})); a.download="bank-pt.json";
   document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500);

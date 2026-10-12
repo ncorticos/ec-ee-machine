@@ -1,4 +1,4 @@
-// Quizzes Machine results gatekeeper — Cloudflare Worker (free tier is enough).
+// EC&EE Machine results gatekeeper — Cloudflare Worker (free tier is enough).
 //
 // Why this exists: the quiz page is static (GitHub Pages) and cannot keep a
 // secret, so it cannot write to GitHub directly. This worker holds the GitHub
@@ -12,7 +12,7 @@
 //     repositories" > quiz-results. Permissions > Contents: Read and write.
 //     Copy the token (ghp_/github_pat_...).
 //  2. Cloudflare: Workers & Pages > Create Worker > paste this file > Deploy.
-//     Or (recommended for updates) connect the Worker to the quiz-machine repo:
+//     Or (recommended for updates) connect the Worker to the ec-ee-machine repo:
 //     Settings > Build > Connect; wrangler.toml there deploys this file on every merge.
 //  3. Worker > Settings > Variables: add secret GITHUB_TOKEN (the token),
 //     text CLASS_CODE (one code per class, comma-separated, e.g.
@@ -29,7 +29,7 @@
 //     NOT 3016 — that one is readable in the page source; not a class code).
 //  7. In the quiz page: 03 Bank > unlock > "Portuguese translation (Gemma)".
 //     Review/correct the text, download bank-pt.json and upload it to the
-//     quiz-machine repo root (GitHub > Add file > Upload files).
+//     ec-ee-machine repo root (GitHub > Add file > Upload files).
 //
 // Class results as CSV (teacher only; needs steps 1–3 and the TEACHER_CODE of step 6):
 //  8. In the quiz page: 04 Results > unlock with 3016 > type the Worker teacher code

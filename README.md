@@ -1,10 +1,10 @@
-# Quizzes Machine
+# EC&EE Machine
 
 Randomised anti-copy classroom quizzes for architecture students —
 **Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency**
 (Lisbon School of Architecture, ULisboa).
 
-Live: https://ncorticos.github.io/quiz-machine/
+Live: https://ncorticos.github.io/ec-ee-machine/
 
 Single self-contained file (`index.html`, no build, no server, works offline).
 Same visual language as [Architecture Advisor](https://ncorticos.github.io/architecture-advisor-pt/).
@@ -87,7 +87,7 @@ the `points` column of both CSV files, written with a decimal comma like the
 `wrangler.toml` describes the Cloudflare Worker `quiz-results` (`worker.js`, the AI
 binding, and `keep_vars` so the dashboard variables stay). Connect the Worker to
 this repository once: Cloudflare > Workers & Pages > quiz-results > Settings >
-Build > **Connect** > GitHub > `ncorticos/quiz-machine`, branch `main` (build
+Build > **Connect** > GitHub > `ncorticos/ec-ee-machine`, branch `main` (build
 command empty, deploy command `npx wrangler deploy`). From then on every merge to
 `main` deploys `worker.js`; the dashboard editor is no longer needed. Secrets
 (`GITHUB_TOKEN`, `TEACHER_CODE`) are never removed by a deploy.
