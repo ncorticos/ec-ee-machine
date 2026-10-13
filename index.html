@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.25.8 — 2026-10-12 (Lisbon)
+  EC&EE Machine 1.25.9 — 2026-10-12 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 576 perguntas extraídas das aulas PPTX L.00–L.03.
 
@@ -204,7 +204,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.8 · 2026-10-12</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.9 · 2026-10-12</span></footer>
 </main>
 <script>
 "use strict";
@@ -244,7 +244,7 @@ pt:{
  lockB:"Definições", codeL:"Código", unlockedMsg:"Desbloqueado — volte a bloquear antes da aula.",
  wrongCode:"Código incorreto.", triesLeft:"tentativas restantes.",
  lockedMsg:"Bloqueado após códigos errados — tente dentro de", minShort:"min.",
- needId:"Indique o nome e o grupo para começar.",
+ needId:"Indique o nome e o grupo para começar.", badName:"O nome não pode ser um link — escreva o seu nome.",
  calA:"Calendário Académico",
  reqRestart:"Pedir reinício", overT:"Tempo esgotado",
  overP:"O ciclo está bloqueado. Peça ao professor para desbloquear e reiniciar.",
@@ -315,7 +315,7 @@ en:{
  lockB:"Settings", codeL:"Code", unlockedMsg:"Unlocked — re-lock before class.",
  wrongCode:"Wrong code.", triesLeft:"attempts left.",
  lockedMsg:"Locked after wrong codes — retry in", minShort:"min.",
- needId:"Enter your name and group to start.",
+ needId:"Enter your name and group to start.", badName:"Name cannot be a link — type your name.",
  calA:"Academic Calendar",
  reqRestart:"Request restart", overT:"Time is up",
  overP:"The cycle is locked. Ask your teacher to unlock and restart it.",
@@ -569,6 +569,7 @@ function renderQuiz(){
     if(UNLOCKED){ $("#c-lockmsg").textContent=t("unlockedMsg"); }
     $("#c-start").onclick = ()=>{
       const nm=$("#c-name").value.trim().replace(/\s+/g," "), kg=$("#c-klass").value;
+      if(/^(https?:\/\/|www\.)/i.test(nm)){ $("#c-warn").textContent=t("badName"); $("#c-name").focus(); return; }
       if(!nm || !kg){ $("#c-warn").textContent=t("needId"); return; }
       try{ localStorage.setItem("qm_name",nm); localStorage.setItem("qm_group",kg); }catch(e){}
       if(DEF.mode==="quiz"){ startQuiz(); return; }
@@ -583,7 +584,7 @@ function renderQuiz(){
       [...sel.options].forEach(o=>{ o.disabled=+o.value>size; });
       if(+sel.value>size) sel.value=String([20,30,40,50].filter(v=>v<=size).pop());
     };
-    const gate=()=>{ $("#c-start").disabled = !($("#c-name").value.trim() && $("#c-klass").value); $("#c-warn").textContent=""; };
+    const gate=()=>{ const v=$("#c-name").value.trim(); $("#c-start").disabled = !v || /^(https?:\/\/|www\.)/i.test(v) || !$("#c-klass").value; $("#c-warn").textContent=""; };
     $("#c-name").oninput=gate; $("#c-klass").oninput=gate; gate();
     if(Q && Q.done) renderResult($("#q-result"));
   } else {
@@ -756,6 +757,11 @@ async function labSend(k){
 }
 function startQuiz(){
   const nm=$("#c-name").value.trim(), kg=$("#c-klass").value;
+  if(/^(https?:\/\/|www\.)/i.test(nm)){
+    $("#c-warn").textContent=t("badName");
+    $("#c-name").focus();
+    return;
+  }
   if(!nm || !kg){
     $("#c-warn").textContent=t("needId");
     (!nm?$("#c-name"):$("#c-klass")).focus();
