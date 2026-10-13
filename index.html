@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.24.2 — 2026-10-12 (Lisbon)
+  EC&EE Machine 1.25.0 — 2026-10-12 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 576 perguntas extraídas das aulas PPTX L.00–L.03.
 
@@ -204,7 +204,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.24.2 · 2026-10-12</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.0 · 2026-10-12</span></footer>
 </main>
 <script>
 "use strict";
@@ -611,8 +611,12 @@ function labGroupSelect(id, sel, onlyTrack){
 }
 const LAB_FOLDER = ""; // teacher: paste the file-request link here, or distribute a ?folder= link
 const LAB_FOLDERS = {
-  1: "https://ulisboa-my.sharepoint.com/:f:/g/personal/ncorticos_office365_ulisboa_pt/IgBuGIk5QgdvQb1SpnFuHokgASp-nHx9HqSEkXvNQjfrso0"
-}; // teacher: one file-request link per submission (1=Context … 5=L&A); send more links to add them here
+  1: "https://ulisboa-my.sharepoint.com/:f:/g/personal/ncorticos_office365_ulisboa_pt/IgBuGIk5QgdvQb1SpnFuHokgASp-nHx9HqSEkXvNQjfrso0",
+  2: "https://ulisboa-my.sharepoint.com/:f:/g/personal/ncorticos_office365_ulisboa_pt/IgBAixW9PCsZRazvhnklTSJ4AaOc3uC4-d6lxPoybDNVKVc",
+  3: "https://ulisboa-my.sharepoint.com/:f:/g/personal/ncorticos_office365_ulisboa_pt/IgCBC5d1z1IRS72sNmQymprTAdAB2e5ze8oMN9z-oitCjlU",
+  4: "https://ulisboa-my.sharepoint.com/:f:/g/personal/ncorticos_office365_ulisboa_pt/IgCE2SgxXxlMRrDARKzRSQSpAa1dAftuoB7iuWRs7mFN0A4",
+  5: "https://ulisboa-my.sharepoint.com/:f:/g/personal/ncorticos_office365_ulisboa_pt/IgAd2mOVjt9ZTqYzbjV2-CfNAbmx-ISCttjDlAnS3sdnF14"
+}; // file-request link per submission (1=Context … 5=L&A)
 function folderURL(){
   try{
     const q = new URLSearchParams(location.search).get("folder");
