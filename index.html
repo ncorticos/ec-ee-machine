@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.24.0 — 2026-10-12 (Lisbon)
+  EC&EE Machine 1.24.1 — 2026-10-12 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 576 perguntas extraídas das aulas PPTX L.00–L.03.
 
@@ -203,7 +203,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.24.0 · 2026-10-12</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.24.1 · 2026-10-12</span></footer>
 </main>
 <script>
 "use strict";
@@ -542,7 +542,7 @@ function renderQuiz(){
         <span class="ctl"><label>${esc(t("bank"))}</label><select id="c-lesson"${lockL?" disabled":""}>${lessonOptions(defLesson)}</select></span>
         <span class="ctl"><label>${esc(t("nq"))}</label>
           <select id="c-n">${[20,30,40,50].map(v=>`<option value="${v}"${v===selN?" selected":""}${v>bankSize?" disabled":""}>${v}</option>`).join("")}</select></span>
-        <span class="ctl"><label>${esc(t("name"))}</label><input type="text" id="c-name" placeholder="—"></span>
+        <span class="ctl"><label>${esc(t("name"))}</label><input type="text" id="c-name" placeholder="—" autocomplete="off" spellcheck="false"></span>
         <span class="ctl"><label>${esc(t("klass"))}</label><select id="c-klass"><option value="">—</option><option value="architects"${selG==="architects"?" selected":""}>${esc(t("grpArch"))}</option><option value="engineers"${selG==="engineers"?" selected":""}>${esc(t("grpEng"))}</option></select></span>
         <label class="chk"><input type="checkbox" id="c-sq" checked> ${esc(t("shufQ"))}</label>
         <label class="chk"><input type="checkbox" id="c-so" checked> ${esc(t("shufO"))}</label>
