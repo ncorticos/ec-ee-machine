@@ -5,9 +5,9 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.25.12 — 2026-10-12 (Lisbon)
+  EC&EE Machine 1.25.14 — 2026-10-12 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
-  Banco: 576 perguntas extraídas das aulas PPTX L.00–L.03.
+  Banco: 1208 perguntas extraídas das aulas PPTX L.00–L.07 (EN) + L.00–L.03 (PT).
 
   GITHUB PAGES: faça push deste ficheiro para o repositório e ative
   Settings > Pages > Deploy from branch. Não precisa de build nem servidor.
@@ -206,7 +206,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.12 · 2026-10-12</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.07 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.14 · 2026-10-12</span></footer>
 </main>
 <script>
 "use strict";
@@ -254,7 +254,7 @@ pt:{
  profUn:"Desbloqueio do professor", noProf:"Email do professor não configurado neste link — chame o docente.",
  needProf:"A revelação da resposta requer o código do professor.",
  bankLocked:"Banco bloqueado — introduza o código do professor para ver as perguntas e respostas.",
- foot:"Banco extraído das aulas L.00–L.03 · cada tentativa baralha perguntas e opções · ficheiro único, funciona offline e no GitHub Pages.",
+ foot:"Banco extraído das aulas L.00–L.07 · cada tentativa baralha perguntas e opções · ficheiro único, funciona offline e no GitHub Pages.",
  trH:"Tradução para português (Gemma)",
  trP:"Traduz o banco inglês desta aula para português europeu através do seu Cloudflare Worker (Workers AI, Gemma 4). Reveja e corrija a coluna em português, descarregue bank-pt.json e carregue-o no repositório ec-ee-machine (Add file > Upload files).",
  trCode:"Código do docente (Worker)", trGo:"Traduzir", trDl:"Descarregar bank-pt.json",
@@ -325,7 +325,7 @@ en:{
  profUn:"Teacher unlock", noProf:"Teacher email not set in this link — call your teacher.",
  needProf:"Revealing the answer requires the teacher code.",
  bankLocked:"Bank locked — enter the teacher code to see the questions and answers.",
- foot:"Bank extracted from lectures L.00–L.03 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.",
+ foot:"Bank extracted from lectures L.00–L.07 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.",
  trH:"Portuguese translation (Gemma)",
  trP:"Translates this lecture's English bank into European Portuguese through your Cloudflare Worker (Workers AI, Gemma 4). Review and correct the Portuguese column, download bank-pt.json and upload it to the ec-ee-machine repository (Add file > Upload files).",
  trCode:"Worker teacher code", trGo:"Translate", trDl:"Download bank-pt.json",
@@ -473,10 +473,10 @@ const LAB_GROUPS = {
 const TRACK_EN = {architects:"Architects", engineers:"Engineers"}; // stored values stay in English whatever the page language
 const labName = (letter, house) => `Group ${letter}` + (house ? ` - ${house}` : "");
 const labValue = (track, letter, house) => `${TRACK_EN[track]} · ${labName(letter, house)}`;
-let KIND = (()=>{ // "theory" | "lab": ?type=lab|theory link, else this device's last choice
+let KIND = (()=>{ // "theory" | "lab": ?type=lab|theory link wins, otherwise always theory
   const q=new URLSearchParams(location.search).get("type");
   if(q==="lab"||q==="theory") return q;
-  try{ return localStorage.getItem("qm_kind")==="lab"?"lab":"theory"; }catch(e){ return "theory"; }
+  return "theory";
 })();
 function drawKind(){
   const box=$("#kindsel"); box.setAttribute("aria-label",t("kindAria"));
