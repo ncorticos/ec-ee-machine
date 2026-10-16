@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.25.17 — 2026-10-12 (Lisbon)
+  EC&EE Machine 1.25.18 — 2026-10-12 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 1208 perguntas extraídas das aulas PPTX L.00–L.07 (EN) + L.00–L.03 (PT).
 
@@ -206,7 +206,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.07 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.17 · 2026-10-12</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.07 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.18 · 2026-10-12</span></footer>
 </main>
 <script>
 "use strict";
@@ -1577,6 +1577,13 @@ async function labDownload(tr, g, k, a){
   }catch(e){ msg.textContent=await workerDiag(url); }
   a.textContent="PDF";
 }
+const clsLessonKey = r => String(r.class||"\u2014");
+const clsLessonNum = k => { const m=/(\d+)\s*$/.exec(k); return m ? +m[1] : 99; };
+const clsGroups = rs => { // lessons ascending, 00 last
+  const keys=[...new Set(rs.map(clsLessonKey))].sort((a,b)=>{ const x=clsLessonNum(a), y=clsLessonNum(b); return (x===0?1e9:x)-(y===0?1e9:y); });
+  return keys.map(k=>[k, (rs.find(r=>clsLessonKey(r)===k)||{}).bank||k, rs.filter(r=>clsLessonKey(r)===k)]);
+};
+function clsRow(r){ return `<tr><td><input type="checkbox" class="rdel" data-id="${esc(r.id)}"></td><td style="font-family:var(--mono)">${esc(fmtLocal(r.date))}</td><td>${esc(r.class||"\u2014")}</td><td>${esc(grpLabel(r.group)||"\u2014")}<br><span class="meta">${esc(r.bank)}</span></td><td style="font-family:var(--mono)">${esc(r.id)}</td><td class="num">${esc(r.score)}/${esc(r.n)} · ${esc(r.pct)}%</td><td class="num"><b>${fmtPts(pts(r.score,r.n))}</b></td><td class="num">${fmtTime(+r.secs||0)}</td></tr>`; }
 function drawClass(){
   drawLabPoints();
   drawLabAdmin();
@@ -1608,7 +1615,7 @@ function drawClass(){
     <div class="grid g2" style="margin:0 0 14px">${sumTable(t("avgLecture"),lectures)}${sumTable(t("avgGroup"),groups)}</div>
     <div class="tbl-scroll"><table class="data">
       <thead><tr><th></th><th>${esc(t("thDate"))}</th><th>${esc(t("code"))}</th><th>${esc(t("klass"))}</th><th>${esc(t("thAtt"))}</th><th class="num">${esc(t("thScore"))}</th><th class="num">${esc(t("thPts"))}</th><th class="num">${esc(t("thT"))}</th></tr></thead>
-      <tbody>${rows.map(r=>`<tr><td><input type="checkbox" class="rdel" data-id="${esc(r.id)}"></td><td style="font-family:var(--mono)">${esc(fmtLocal(r.date))}</td><td>${esc(r.class||"—")}</td><td>${esc(grpLabel(r.group)||"—")}<br><span class="meta">${esc(r.bank)}</span></td><td style="font-family:var(--mono)">${esc(r.id)}</td><td class="num">${esc(r.score)}/${esc(r.n)} · ${esc(r.pct)}%</td><td class="num"><b>${fmtPts(pts(r.score,r.n))}</b></td><td class="num">${fmtTime(+r.secs||0)}</td></tr>`).join("")}</tbody>
+      <tbody>${clsGroups(rows).map(([kc,label,rs])=>`<tr class="trk"><td colspan="8">${esc(label)}</td></tr>`+rs.map(r=>clsRow(r)).join("")).join("")}</tbody>
     </table></div>`;
   $("#e-clsf").onchange=e=>{ CLS.filter=e.target.value; drawClass(); };
   const updDel=()=>{ const n=document.querySelectorAll(".rdel:checked").length; const s2=$("#e-deln"); if(s2) s2.textContent=n; };
