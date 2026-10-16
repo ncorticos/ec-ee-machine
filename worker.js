@@ -234,6 +234,11 @@ async function handle(req, env) {
     if (b.code !== env.TEACHER_CODE) return json({ ok: false, error: "code" }, 403);
     return b.action === "labopen" ? labOpen(b, env) : b.action === "labpoints" ? labPoints(b, env) : labFile(b, env);
   }
+  if (b && b.action === "delresult") {
+    if (!env.TEACHER_CODE) return json({ ok: false, error: "code", detail: "TEACHER_CODE not set" }, 403);
+    if (b.code !== env.TEACHER_CODE) return json({ ok: false, error: "code" }, 403);
+    return delResult(b, env);
+  }
   const CODES = String(env.CLASS_CODE || "").split(",").map(s => s.trim()).filter(Boolean);
   if (!CODES.length || !CODES.includes(b.code)) {
     return json({ ok: false, error: "code" }, 403);
@@ -285,6 +290,33 @@ async function handle(req, env) {
   });
   // GitHub's status tells the teacher what to fix: 401 token, 403 permission, 404 repo name/access
   if (!put.ok) return json({ ok: false, error: "github", detail: String(put.status) }, 502);
+  return json({ ok: true, id });
+}
+
+// Teacher: delete one mistaken quiz attempt (results/<id>.json). Gated by TEACHER_CODE above.
+async function delResult(b, env){
+  const id = String(b.id || "");
+  if (!ID_RE.test(id)) return json({ ok: false, error: "shape" }, 400);
+  const path = `results/${id}.json`;
+  const headers = {
+    Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+    Accept: "application/vnd.github+json",
+    "Content-Type": "application/json",
+    "User-Agent": "ec-ee-machine-worker",
+  };
+  let sha;
+  try {
+    const get = await fetch(`${GH}/repos/${env.REPO}/contents/${path}`, { headers });
+    if (get.status === 404) return json({ ok: false, error: "gone" }, 404);
+    if (!get.ok) return json({ ok: false, error: "github", detail: String(get.status) }, 502);
+    sha = (await get.json()).sha;
+  } catch { return json({ ok: false, error: "github" }, 502); }
+  const del = await fetch(`${GH}/repos/${env.REPO}/contents/${path}`, {
+    method: "DELETE",
+    headers,
+    body: JSON.stringify({ message: `delete mistaken result ${id}`, sha }),
+  });
+  if (!del.ok) return json({ ok: false, error: "github", detail: String(del.status) }, 502);
   return json({ ok: true, id });
 }
 
