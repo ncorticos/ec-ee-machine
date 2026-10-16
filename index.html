@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.25.16 — 2026-10-12 (Lisbon)
+  EC&EE Machine 1.25.17 — 2026-10-12 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 1208 perguntas extraídas das aulas PPTX L.00–L.07 (EN) + L.00–L.03 (PT).
 
@@ -206,7 +206,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.07 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.16 · 2026-10-12</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.07 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.17 · 2026-10-12</span></footer>
 </main>
 <script>
 "use strict";
@@ -246,7 +246,7 @@ pt:{
  lockB:"Definições", codeL:"Código", unlockedMsg:"Desbloqueado — volte a bloquear antes da aula.",
  wrongCode:"Código incorreto.", triesLeft:"tentativas restantes.",
  lockedMsg:"Bloqueado após códigos errados — tente dentro de", minShort:"min.",
- needId:"Indique o nome e o grupo para começar.", badName:"O nome não pode ser um link — escreva o seu nome.", bankNeed:"Escolha a aula para começar.",
+ needId:"Indique o nome e o grupo para começar.", badName:"O nome não pode ser um link — escreva o seu nome.", bankNeed:"Escolha a aula para começar.", lessonClosed:"Esta aula está encerrada — escolha outra.",
  calA:"Calendário Académico",
  reqRestart:"Pedir reinício", overT:"Tempo esgotado",
  overP:"O ciclo está bloqueado. Peça ao professor para desbloquear e reiniciar.",
@@ -274,7 +274,7 @@ pt:{
  wkCrash:"O Worker responde, mas falhou ao guardar. Docente: cole de novo o worker.js mais recente no Cloudflare e veja os Logs do Worker.",
  wkDown:"Sem resposta do Worker de resultados (verifique a ligação à Internet). Docente: confirme que o worker.js do quiz está publicado em",
  resLocked:"Exportar e apagar requerem o código do docente.",
- clsH:"Resultados da turma", clsGo:"Descarregar CSV", clsBusy:"A carregar…", delSel:"Apagar selecionados", delConf:"Apagar {n} tentativa(s) selecionada(s)? Não há como anular.", delDone:"Apagadas.", delFail:"Falha ao apagar:",
+ clsH:"Resultados da turma", clsGo:"Descarregar CSV", clsBusy:"A carregar…", delSel:"Apagar selecionados", delDeny:"Código recusado — atualize o worker.js (Edit code, Save and deploy) e confirme o TEACHER_CODE.", delConf:"Apagar {n} tentativa(s) selecionada(s)? Não há como anular.", delDone:"Apagadas.", delFail:"Falha ao apagar:",
  labResH:"Resultados de laboratório", labResP:"Entregas e pontos dos grupos de laboratório (docente). Os resultados dos questionários estão em Teórica.", labPanH:"Entregas e pontos", labPanP:"Código do docente do Worker para abrir/fechar entregas, descarregar os trabalhos e dar pontos.", labPtsAvg:"Total (0–5)", labPtsH:"Pontos (0–5)", labPtsP:"Uma linha por grupo de laboratório. Escreva os pontos (0–5) de cada item: ficam guardados ao sair do campo e os estudantes não os veem. Total = média dos itens já avaliados.", labPtsCsv:"Descarregar pontos (CSV)", labPtsBad:"Os pontos têm de estar entre 0 e 5.",
  labProf:"Docente de laboratório", labMembers:"Elementos do grupo", tabLab:"Entregas", labH:"Entregas de laboratório", labP:"Escolha o grupo de laboratório: aparecem os elementos do grupo e as cinco entregas. Entregue cada entrega aberta: um PDF (até 10 MB) ou um link (Drive / OneDrive). Uma nova entrega substitui a anterior enquanto estiver aberta.", labSub:"Entrega", labOpen:"Aberta", labClosed:"Fechada", labDone:"Entregue", labOr:"ou link", labLinkPh:"https://… (Drive / OneDrive)", labLinkW:"link", labSend:"Entregar", labResend:"Substituir", labSending:"A enviar…", labSent:"Entregue ✓", labLast:"Última:", labPick:"Escolha o grupo de laboratório para ver as entregas.", labNeedFile:"Escolha um PDF ou cole um link.", labTooBig:"O PDF tem mais de 10 MB: comprima-o ou entregue um link.", labNotPdf:"Só ficheiros PDF.", labBadLink:"O link tem de começar por https://", labClosedMsg:"Fechada: o docente abre-a na aula.", labIsClosed:"Esta entrega está fechada.", labReplace:"Entregar de novo substitui a anterior.", labFolderT:"Entregar na pasta de submissões", labFolderP:"Carregue no botão para entregar os seus trabalhos na pasta de submissões. É através deste botão que deve submeter os trabalhos.", labFolderGo:"Abrir pasta de submissões", labFolderSet:"Definir ligação da pasta", labOld:"As entregas ainda não estão disponíveis: o docente tem de atualizar o Worker.", labAdmH:"Entregas de laboratório", labAdmP:"Abra ou feche cada entrega para todos os grupos; descarregue o PDF ou abra o link de cada grupo.", labOpenB:"Abrir", labCloseB:"Fechar", labOpenList:"abertas", labNone:"nenhuma", labGrp:"Grupo", labAdmOld:"Para gerir as entregas de laboratório, atualize o Worker: Cloudflare > quiz-results > Edit code > colar o worker.js atual > Deploy.",
  thPts:"Pontos (0–5)", ptsUnit:"pontos", clsAll:"Todas", clsCount:"tentativas", clsCount1:"tentativa", thisDev:"Neste dispositivo", clsAvg:"média", qLeft:"Perguntas por responder", tLeft:"Tempo restante",
@@ -317,7 +317,7 @@ en:{
  lockB:"Settings", codeL:"Code", unlockedMsg:"Unlocked — re-lock before class.",
  wrongCode:"Wrong code.", triesLeft:"attempts left.",
  lockedMsg:"Locked after wrong codes — retry in", minShort:"min.",
- needId:"Enter your name and group to start.", badName:"Name cannot be a link — type your name.", bankNeed:"Choose the lecture to start.",
+ needId:"Enter your name and group to start.", badName:"Name cannot be a link — type your name.", bankNeed:"Choose the lecture to start.", lessonClosed:"This lecture is closed — choose another.",
  calA:"Academic Calendar",
  reqRestart:"Request restart", overT:"Time is up",
  overP:"The cycle is locked. Ask your teacher to unlock and restart it.",
@@ -345,7 +345,7 @@ en:{
  wkCrash:"The Worker answers but failed while saving. Teacher: re-paste the latest worker.js in Cloudflare and check the Worker's Logs.",
  wkDown:"No answer from the results Worker (check the internet connection). Teacher: check that the quiz worker.js is deployed at",
  resLocked:"Exporting and clearing need the teacher code.",
- clsH:"Class results", clsGo:"Download CSV", clsBusy:"Loading…", delSel:"Delete selected", delConf:"Delete {n} selected attempt(s)? This cannot be undone.", delDone:"Deleted.", delFail:"Failed to delete:",
+ clsH:"Class results", clsGo:"Download CSV", clsBusy:"Loading…", delSel:"Delete selected", delDeny:"Teacher code rejected — redeploy worker.js (Edit code, Save and deploy) and check TEACHER_CODE.", delConf:"Delete {n} selected attempt(s)? This cannot be undone.", delDone:"Deleted.", delFail:"Failed to delete:",
  labResH:"Lab results", labResP:"Submissions and points of the lab groups (teacher). The quiz results are under Theoretical.", labPanH:"Submissions and points", labPanP:"Worker teacher code to open/close submissions, download the work and give points.", labPtsAvg:"Total (0–5)", labPtsH:"Points (0–5)", labPtsP:"One row per lab group. Type each item's points (0–5): they are saved when you leave the field, and students do not see them. Total = average of the items graded so far.", labPtsCsv:"Download points (CSV)", labPtsBad:"Points must be between 0 and 5.",
  labProf:"Lab professor", labMembers:"Group members", tabLab:"Submissions", labH:"Lab submissions", labP:"Choose your lab group: its members and its five submissions appear below. Hand in each open submission: a PDF (up to 10 MB) or a link (Drive / OneDrive). While a submission is open, a new one replaces the previous one.", labSub:"Submission", labOpen:"Open", labClosed:"Closed", labDone:"Submitted", labOr:"or link", labLinkPh:"https://… (Drive / OneDrive)", labLinkW:"link", labSend:"Submit", labResend:"Replace", labSending:"Uploading…", labSent:"Submitted ✓", labLast:"Last:", labPick:"Choose your lab group to see its submissions.", labNeedFile:"Choose a PDF or paste a link.", labTooBig:"The PDF is larger than 10 MB: compress it or submit a link.", labNotPdf:"PDF files only.", labBadLink:"The link must start with https://", labClosedMsg:"Closed: your teacher opens it in class.", labIsClosed:"This submission is closed.", labReplace:"Submitting again replaces the previous one.", labFolderT:"Submit to the submissions folder", labFolderP:"Press the button to submit your works to the submissions folder. You must use this button to hand in your works.", labFolderGo:"Open the submissions folder", labFolderSet:"Set folder link", labOld:"Submissions are not available yet: the teacher must update the Worker.", labAdmH:"Lab submissions", labAdmP:"Open or close each submission for every group; download each group's PDF or open its link.", labOpenB:"Open", labCloseB:"Close", labOpenList:"open", labNone:"none", labGrp:"Group", labAdmOld:"To manage the lab submissions, update the Worker: Cloudflare > quiz-results > Edit code > paste the current worker.js > Deploy.",
  thPts:"Points (0–5)", ptsUnit:"points", clsAll:"All", clsCount:"attempts", clsCount1:"attempt", thisDev:"This device", clsAvg:"average", qLeft:"Questions left", tLeft:"Time left",
@@ -396,6 +396,8 @@ const DEF = (()=>{
   };
 })();
 let LESSON_SEL = DEF.lessonFixed ? DEF.lesson : ""; // empty until the student chooses (or the link fixes it)
+const CLOSED=["aula0","aula1"]; // finished lectures: no new attempts (teacher bypass with 3016)
+function lessonBlocked(k){ return CLOSED.includes(k) && !UNLOCKED; }
 function lockInfo(){ try{return JSON.parse(localStorage.getItem(LOCKKEY)||'{"f":0,"u":0}');}catch(e){return{f:0,u:0};} }
 function lockSave(o){ try{localStorage.setItem(LOCKKEY,JSON.stringify(o));}catch(e){} }
 function lockRemaining(){ return Math.max(0, lockInfo().u - Date.now()); }
@@ -524,13 +526,14 @@ function renderPage(){
 /* ---------- quiz tab ---------- */
 function lessonOptions(sel){
   return `<option value="">—</option>`+bankLessons().map(k =>
-    `<option value="${k}"${k===sel?" selected":""}>${esc(LESSON[LANG][k])} (${BANKS[LANG][k].length})</option>`).join("");
+    `<option value="${k}"${k===sel?" selected":""}${lessonBlocked(k)?" disabled":""}>${esc(LESSON[LANG][k])} (${BANKS[LANG][k].length})</option>`).join("");
 }
 function renderQuiz(){
   const el = $("#pg-quiz");
   if(window._lockT){ clearInterval(window._lockT); window._lockT=null; }
   if(!Q || Q.done){ // setup view (+ result below if done)
-    const defLesson = LESSON_SEL;
+    let defLesson = LESSON_SEL;
+    if(CLOSED.includes(defLesson) && !UNLOCKED){ defLesson = bankLessons().find(k=>!CLOSED.includes(k)) || defLesson; LESSON_SEL = defLesson; }
     const lockL = DEF.lessonFixed || !!(S && !S.done); // fixed by the link, or an attempt is running
     const bankSize = currentBank(defLesson).length;
     const validN = [20,30,40,50].filter(v=>v<=bankSize);
@@ -573,6 +576,7 @@ function renderQuiz(){
       const nm=$("#c-name").value.trim().replace(/\s+/g," "), kg=$("#c-klass").value;
       if(/^(https?:\/\/|www\.)/i.test(nm)){ $("#c-warn").textContent=t("badName"); $("#c-name").focus(); return; }
       if(!LESSON_SEL){ $("#c-warn").textContent=t("bankNeed"); return; }
+      if(lessonBlocked(LESSON_SEL)){ $("#c-warn").textContent=t("lessonClosed"); return; }
       if(!nm || !kg){ $("#c-warn").textContent=t("needId"); return; }
       try{ localStorage.setItem("qm_name",nm); localStorage.setItem("qm_group",kg); }catch(e){}
       if(DEF.mode==="quiz"){ startQuiz(); return; }
@@ -588,7 +592,7 @@ function renderQuiz(){
       if(+sel.value>size) sel.value=String([20,30,40,50].filter(v=>v<=size).pop());
       gate();
     };
-    const gate=()=>{ const v=$("#c-name").value.trim(); $("#c-start").disabled = !LESSON_SEL || !v || /^(https?:\/\/|www\.)/i.test(v) || !$("#c-klass").value; $("#c-warn").textContent=""; };
+    const gate=()=>{ const v=$("#c-name").value.trim(); $("#c-start").disabled = !LESSON_SEL || lessonBlocked(LESSON_SEL) || !v || /^(https?:\/\/|www\.)/i.test(v) || !$("#c-klass").value; $("#c-warn").textContent=""; };
     $("#c-name").oninput=gate; $("#c-klass").oninput=gate; gate();
     const cleanName=()=>{ const n=$("#c-name"); if(n && /^(https?:\/\/|www\.)/i.test(n.value.trim())){ n.value=""; gate(); }
       try{ const s=localStorage.getItem("qm_name")||""; if(/^(https?:\/\/|www\.)/i.test(s.trim())) localStorage.removeItem("qm_name"); }catch(e){} };
@@ -788,6 +792,7 @@ function startQuiz(){
     return;
   }
   const lesson = LESSON_SEL;
+  if(lessonBlocked(lesson)){ $("#c-warn").textContent=t("lessonClosed"); return; }
   const bank = currentBank(lesson);
   const n = Math.max(1, Math.min(bank.length, parseInt($("#c-n").value||"10",10)));
   const shQ = $("#c-sq").checked, shO = $("#c-so").checked;
@@ -971,6 +976,7 @@ function projReshuffle(full){
 let S = null; // {id,name,klass,lesson,n,items:[{src,correct}],ans:{},startT,done,timedOut,secs,score,sent}
 const ADVANCE_MS = 500; // pause on the chosen answer before the next question
 function startSession(nm,kg){
+  if(lessonBlocked(LESSON_SEL)) return;
   P.lesson=LESSON_SEL; projReshuffle();
   const bank=currentBank(P.lesson), sel=$("#c-n"); // "Questions" setting on the start screen (default ?n=, else 20)
   const n=Math.min((sel && parseInt(sel.value,10)) || DEF.n, bank.length);
@@ -1617,11 +1623,16 @@ function drawClass(){
       try{
         const r=await toWorker(url,{action:"delresult",code:TRCODE,id});
         const j=await r.json().catch(()=>({}));
-        if(!(r.ok&&j.ok)) fails.push(id);
-      }catch(e){ fails.push(id); }
+        if(r.ok&&j.ok) continue;
+        if(r.status===404) continue; // already gone: counts as deleted
+        fails.push(id+(r.status===403?" \u2715":" ?"));
+      }catch(e){ fails.push(id+" ?"); }
     }
     btn.disabled=false;
-    const doneMsg=fails.length ? t("delFail")+" "+fails.join(", ") : t("delDone");
+    const denied=fails.filter(f=>f.endsWith(" \u2715")).map(f=>f.slice(0,-2)), other=fails.filter(f=>!f.endsWith(" \u2715"));
+    let doneMsg=t("delDone");
+    if(denied.length) doneMsg=t("delDeny");
+    if(other.length) doneMsg+=(denied.length?" ":"")+t("delFail")+" "+other.join(", ");
     await fetchClass(); drawClass();
     const m2=$("#e-delmsg"); if(m2) m2.textContent=doneMsg;
   };
