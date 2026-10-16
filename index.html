@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.25.14 — 2026-10-12 (Lisbon)
+  EC&EE Machine 1.25.15 — 2026-10-12 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 1208 perguntas extraídas das aulas PPTX L.00–L.07 (EN) + L.00–L.03 (PT).
 
@@ -206,7 +206,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.07 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.14 · 2026-10-12</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.07 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.15 · 2026-10-12</span></footer>
 </main>
 <script>
 "use strict";
@@ -590,6 +590,10 @@ function renderQuiz(){
     };
     const gate=()=>{ const v=$("#c-name").value.trim(); $("#c-start").disabled = !LESSON_SEL || !v || /^(https?:\/\/|www\.)/i.test(v) || !$("#c-klass").value; $("#c-warn").textContent=""; };
     $("#c-name").oninput=gate; $("#c-klass").oninput=gate; gate();
+    const cleanName=()=>{ const n=$("#c-name"); if(n && /^(https?:\/\/|www\.)/i.test(n.value.trim())){ n.value=""; gate(); }
+      try{ const s=localStorage.getItem("qm_name")||""; if(/^(https?:\/\/|www\.)/i.test(s.trim())) localStorage.removeItem("qm_name"); }catch(e){} };
+    setTimeout(cleanName, 400); // catches browser-restored junk after load
+    $("#c-name").addEventListener("focus", cleanName);
     if(Q && Q.done) renderResult($("#q-result"));
   } else {
     renderAttempt(el);
