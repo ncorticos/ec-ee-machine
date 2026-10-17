@@ -234,10 +234,13 @@ async function handle(req, env) {
     if (b.code !== env.TEACHER_CODE) return json({ ok: false, error: "code" }, 403);
     return b.action === "labopen" ? labOpen(b, env) : b.action === "labpoints" ? labPoints(b, env) : labFile(b, env);
   }
-  if (b && b.action === "delresult") {
+  if (b && (b.action === "trashresult" || b.action === "restore" || b.action === "purgetrash" || b.action === "listtrash" || b.action === "delresult")) {
     if (!env.TEACHER_CODE) return json({ ok: false, error: "code", detail: "TEACHER_CODE not set" }, 403);
     if (b.code !== env.TEACHER_CODE) return json({ ok: false, error: "code" }, 403);
-    return delResult(b, env);
+    if (b.action === "listtrash") return listTrash(b, env);
+    if (b.action === "purgetrash") return delResult(b, env, "trash");
+    if (b.action === "delresult") return delResult(b, env, "results");
+    return moveResult(b, env, b.action === "restore" ? "trash" : "results", b.action === "restore" ? "results" : "trash");
   }
   const CODES = String(env.CLASS_CODE || "").split(",").map(s => s.trim()).filter(Boolean);
   if (!CODES.length || !CODES.includes(b.code)) {
@@ -293,11 +296,11 @@ async function handle(req, env) {
   return json({ ok: true, id });
 }
 
-// Teacher: delete one mistaken quiz attempt (results/<id>.json). Gated by TEACHER_CODE above.
-async function delResult(b, env){
+// Teacher: delete one attempt file permanently (results/ or trash/). Gated by TEACHER_CODE above.
+async function delResult(b, env, dir){
   const id = String(b.id || "");
   if (!ID_RE.test(id)) return json({ ok: false, error: "shape" }, 400);
-  const path = `results/${id}.json`;
+  const path = `${dir || "results"}/${id}.json`;
   const headers = {
     Authorization: `Bearer ${env.GITHUB_TOKEN}`,
     Accept: "application/vnd.github+json",
@@ -318,6 +321,85 @@ async function delResult(b, env){
   });
   if (!del.ok) return json({ ok: false, error: "github", detail: String(del.status) }, 502);
   return json({ ok: true, id });
+}
+
+// Teacher: move an attempt between results/ and trash/ (PUT to the new path, then DELETE the old one).
+async function moveResult(b, env, from, to){
+  const id = String(b.id || "");
+  if (!ID_RE.test(id)) return json({ ok: false, error: "shape" }, 400);
+  const headers = {
+    Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+    Accept: "application/vnd.github+json",
+    "Content-Type": "application/json",
+    "User-Agent": "ec-ee-machine-worker",
+  };
+  let content, sha;
+  try {
+    const get = await fetch(`${GH}/repos/${env.REPO}/contents/${from}/${id}.json`, { headers });
+    if (get.status === 404) return json({ ok: false, error: "gone" }, 404);
+    if (!get.ok) return json({ ok: false, error: "github", detail: String(get.status) }, 502);
+    const j = await get.json();
+    content = j.content; // base64: re-PUT as-is
+    sha = j.sha;
+  } catch (e) {
+    return json({ ok: false, error: "net", detail: String(e && e.message || e) }, 502);
+  }
+  // destination may already exist (restore after a partial move): reuse its sha
+  let toSha;
+  try {
+    const dg = await fetch(`${GH}/repos/${env.REPO}/contents/${to}/${id}.json`, { headers });
+    if (dg.ok) toSha = (await dg.json()).sha;
+  } catch {}
+  try {
+    const put = await fetch(`${GH}/repos/${env.REPO}/contents/${to}/${id}.json`, {
+      method: "PUT", headers,
+      body: JSON.stringify({ message: `ec-ee-machine: move ${id} ${from}->${to}`, content, ...(toSha ? { sha: toSha } : {}) }),
+    });
+    if (!put.ok) return json({ ok: false, error: "github", detail: String(put.status) }, 502);
+  } catch (e) {
+    return json({ ok: false, error: "net", detail: String(e && e.message || e) }, 502);
+  }
+  try {
+    const del = await fetch(`${GH}/repos/${env.REPO}/contents/${from}/${id}.json`, {
+      method: "DELETE", headers,
+      body: JSON.stringify({ message: `ec-ee-machine: move ${id} ${from}->${to} (remove)`, sha }),
+    });
+    if (!del.ok) return json({ ok: false, error: "github", detail: String(del.status) }, 502);
+  } catch (e) {
+    return json({ ok: false, error: "net", detail: String(e && e.message || e) }, 502);
+  }
+  return json({ ok: true, id });
+}
+
+// Teacher: list trashed attempts (trash/*.json), newest first.
+async function listTrash(b, env){
+  const headers = {
+    Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+    Accept: "application/vnd.github+json",
+    "User-Agent": "ec-ee-machine-worker",
+  };
+  try {
+    const get = await fetch(`${GH}/repos/${env.REPO}/contents/trash`, { headers });
+    if (get.status === 404) return json({ ok: true, records: [] });
+    if (!get.ok) return json({ ok: false, error: "github", detail: String(get.status) }, 502);
+    const entries = await get.json();
+    if (!Array.isArray(entries)) return json({ ok: true, records: [] });
+    const records = [];
+    for (const e of entries) {
+      if (!e.name || !e.name.endsWith(".json")) continue;
+      try {
+        const raw = await fetch(`${GH}/repos/${env.REPO}/contents/trash/${e.name}`, {
+          headers: { ...headers, Accept: "application/vnd.github.raw+json" },
+        });
+        if (!raw.ok) continue;
+        records.push(await raw.json());
+      } catch {}
+    }
+    records.sort((a, b2) => String(b2.at || "").localeCompare(String(a.at || "")));
+    return json({ ok: true, records });
+  } catch (e) {
+    return json({ ok: false, error: "net", detail: String(e && e.message || e) }, 502);
+  }
 }
 
 // ---------- LAB submissions: 5 per lab group, a PDF (≤ 10 MB) or a link ----------

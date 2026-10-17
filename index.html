@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.25.19 — 2026-10-12 (Lisbon)
+  EC&EE Machine 1.26.0 — 2026-10-12 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 1208 perguntas extraídas das aulas PPTX L.00–L.07 (EN) + L.00–L.03 (PT).
 
@@ -206,7 +206,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.07 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.25.19 · 2026-10-12</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.07 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.26.0 · 2026-10-12</span></footer>
 </main>
 <script>
 "use strict";
@@ -274,7 +274,7 @@ pt:{
  wkCrash:"O Worker responde, mas falhou ao guardar. Docente: cole de novo o worker.js mais recente no Cloudflare e veja os Logs do Worker.",
  wkDown:"Sem resposta do Worker de resultados (verifique a ligação à Internet). Docente: confirme que o worker.js do quiz está publicado em",
  resLocked:"Exportar e apagar requerem o código do docente.",
- clsH:"Resultados da turma", clsGo:"Descarregar CSV", clsBusy:"A carregar…", delSel:"Apagar selecionados", delDeny:"Código recusado — atualize o worker.js (Edit code, Save and deploy) e confirme o TEACHER_CODE.", delConf:"Apagar {n} tentativa(s) selecionada(s)? Não há como anular.", delDone:"Apagadas.", delFail:"Falha ao apagar:",
+ clsH:"Resultados da turma", clsGo:"Descarregar CSV", clsBusy:"A carregar…", delSel:"Mover para o lixo", delDeny:"Código recusado — atualize o worker.js (Edit code, Save and deploy) e confirme o TEACHER_CODE.", delConf:"Mover {n} tentativa(s) selecionada(s) para o lixo? Pode restaurá-las depois.", delDone:"Movidas para o lixo.", delFail:"Falha ao mover:", trashH:"Lixo", trashP:"Tentativas movidas para o lixo. Restaurar devolve-as aos resultados; Apagar elimina-as em definitivo.", trashEmpty:"O lixo está vazio.", trashRestore:"Restaurar", trashPurge:"Apagar", trashPurgeConf:"Apagar em definitivo esta tentativa? Isto não pode ser anulado.",
  labResH:"Resultados de laboratório", labResP:"Entregas e pontos dos grupos de laboratório (docente). Os resultados dos questionários estão em Teórica.", labPanH:"Entregas e pontos", labPanP:"Código do docente do Worker para abrir/fechar entregas, descarregar os trabalhos e dar pontos.", labPtsAvg:"Total (0–5)", labPtsH:"Pontos (0–5)", labPtsP:"Uma linha por grupo de laboratório. Escreva os pontos (0–5) de cada item: ficam guardados ao sair do campo e os estudantes não os veem. Total = média dos itens já avaliados.", labPtsCsv:"Descarregar pontos (CSV)", labPtsBad:"Os pontos têm de estar entre 0 e 5.",
  labProf:"Docente de laboratório", labMembers:"Elementos do grupo", tabLab:"Entregas", labH:"Entregas de laboratório", labP:"Escolha o grupo de laboratório: aparecem os elementos do grupo e as cinco entregas. Entregue cada entrega aberta: um PDF (até 10 MB) ou um link (Drive / OneDrive). Uma nova entrega substitui a anterior enquanto estiver aberta.", labSub:"Entrega", labOpen:"Aberta", labClosed:"Fechada", labDone:"Entregue", labOr:"ou link", labLinkPh:"https://… (Drive / OneDrive)", labLinkW:"link", labSend:"Entregar", labResend:"Substituir", labSending:"A enviar…", labSent:"Entregue ✓", labLast:"Última:", labPick:"Escolha o grupo de laboratório para ver as entregas.", labNeedFile:"Escolha um PDF ou cole um link.", labTooBig:"O PDF tem mais de 10 MB: comprima-o ou entregue um link.", labNotPdf:"Só ficheiros PDF.", labBadLink:"O link tem de começar por https://", labClosedMsg:"Fechada: o docente abre-a na aula.", labIsClosed:"Esta entrega está fechada.", labReplace:"Entregar de novo substitui a anterior.", labFolderT:"Entregar na pasta de submissões", labFolderP:"Carregue no botão para entregar os seus trabalhos na pasta de submissões. É através deste botão que deve submeter os trabalhos.", labFolderGo:"Abrir pasta de submissões", labFolderSet:"Definir ligação da pasta", labOld:"As entregas ainda não estão disponíveis: o docente tem de atualizar o Worker.", labAdmH:"Entregas de laboratório", labAdmP:"Abra ou feche cada entrega para todos os grupos; descarregue o PDF ou abra o link de cada grupo.", labOpenB:"Abrir", labCloseB:"Fechar", labOpenList:"abertas", labNone:"nenhuma", labGrp:"Grupo", labAdmOld:"Para gerir as entregas de laboratório, atualize o Worker: Cloudflare > quiz-results > Edit code > colar o worker.js atual > Deploy.",
  thPts:"Pontos (0–5)", ptsUnit:"pontos", clsAll:"Todas", clsCount:"tentativas", clsCount1:"tentativa", thisDev:"Neste dispositivo", clsAvg:"média", qLeft:"Perguntas por responder", tLeft:"Tempo restante",
@@ -345,7 +345,7 @@ en:{
  wkCrash:"The Worker answers but failed while saving. Teacher: re-paste the latest worker.js in Cloudflare and check the Worker's Logs.",
  wkDown:"No answer from the results Worker (check the internet connection). Teacher: check that the quiz worker.js is deployed at",
  resLocked:"Exporting and clearing need the teacher code.",
- clsH:"Class results", clsGo:"Download CSV", clsBusy:"Loading…", delSel:"Delete selected", delDeny:"Teacher code rejected — redeploy worker.js (Edit code, Save and deploy) and check TEACHER_CODE.", delConf:"Delete {n} selected attempt(s)? This cannot be undone.", delDone:"Deleted.", delFail:"Failed to delete:",
+ clsH:"Class results", clsGo:"Download CSV", clsBusy:"Loading…", delSel:"Move to trash", delDeny:"Teacher code rejected — redeploy worker.js (Edit code, Save and deploy) and check TEACHER_CODE.", delConf:"Move {n} selected attempt(s) to trash? You can restore them later.", delDone:"Moved to trash.", delFail:"Failed to move:", trashH:"Trash", trashP:"Attempts moved to trash. Restore brings them back to the results; Delete removes them for good.", trashEmpty:"The trash is empty.", trashRestore:"Restore", trashPurge:"Delete", trashPurgeConf:"Delete this attempt for good? This cannot be undone.",
  labResH:"Lab results", labResP:"Submissions and points of the lab groups (teacher). The quiz results are under Theoretical.", labPanH:"Submissions and points", labPanP:"Worker teacher code to open/close submissions, download the work and give points.", labPtsAvg:"Total (0–5)", labPtsH:"Points (0–5)", labPtsP:"One row per lab group. Type each item's points (0–5): they are saved when you leave the field, and students do not see them. Total = average of the items graded so far.", labPtsCsv:"Download points (CSV)", labPtsBad:"Points must be between 0 and 5.",
  labProf:"Lab professor", labMembers:"Group members", tabLab:"Submissions", labH:"Lab submissions", labP:"Choose your lab group: its members and its five submissions appear below. Hand in each open submission: a PDF (up to 10 MB) or a link (Drive / OneDrive). While a submission is open, a new one replaces the previous one.", labSub:"Submission", labOpen:"Open", labClosed:"Closed", labDone:"Submitted", labOr:"or link", labLinkPh:"https://… (Drive / OneDrive)", labLinkW:"link", labSend:"Submit", labResend:"Replace", labSending:"Uploading…", labSent:"Submitted ✓", labLast:"Last:", labPick:"Choose your lab group to see its submissions.", labNeedFile:"Choose a PDF or paste a link.", labTooBig:"The PDF is larger than 10 MB: compress it or submit a link.", labNotPdf:"PDF files only.", labBadLink:"The link must start with https://", labClosedMsg:"Closed: your teacher opens it in class.", labIsClosed:"This submission is closed.", labReplace:"Submitting again replaces the previous one.", labFolderT:"Submit to the submissions folder", labFolderP:"Press the button to submit your works to the submissions folder. You must use this button to hand in your works.", labFolderGo:"Open the submissions folder", labFolderSet:"Set folder link", labOld:"Submissions are not available yet: the teacher must update the Worker.", labAdmH:"Lab submissions", labAdmP:"Open or close each submission for every group; download each group's PDF or open its link.", labOpenB:"Open", labCloseB:"Close", labOpenList:"open", labNone:"none", labGrp:"Group", labAdmOld:"To manage the lab submissions, update the Worker: Cloudflare > quiz-results > Edit code > paste the current worker.js > Deploy.",
  thPts:"Points (0–5)", ptsUnit:"points", clsAll:"All", clsCount:"attempts", clsCount1:"attempt", thisDev:"This device", clsAvg:"average", qLeft:"Questions left", tLeft:"Time left",
@@ -1426,6 +1426,7 @@ function codeCheck(val){ // teacher code with the shared escalating lockout; "" 
 }
 /* ---------- class results: every attempt sent to the Worker (private quiz-results repo) ---------- */
 let CLS = null; // {records, filter}: last list loaded in this tab (kept across re-renders, never stored)
+let TRASH = null, TRASH_OPEN = false; // trashed attempts (cache) + whether the trash section is open
 async function fetchClass(){ // records, or null with the reason shown
   const url=submitURL(), msg=$("#e-clsmsg");
   if(!url){ msg.textContent=t("trNeedURL"); return null; }
@@ -1616,8 +1617,15 @@ function drawClass(){
     <div class="tbl-scroll"><table class="data">
       <thead><tr><th></th><th>${esc(t("thDate"))}</th><th>${esc(t("thName"))}</th><th>${esc(t("code"))}</th><th>${esc(t("klass"))}</th><th>${esc(t("thAtt"))}</th><th class="num">${esc(t("thScore"))}</th><th class="num">${esc(t("thPts"))}</th><th class="num">${esc(t("thT"))}</th></tr></thead>
       <tbody>${clsGroups(rows).map(([kc,label,rs])=>`<tr class="trk"><td colspan="9">${esc(label)}</td></tr>`+rs.map(r=>clsRow(r)).join("")).join("")}</tbody>
-    </table></div>`;
+    </table></div>
+    <details class="roster" style="margin:12px 0 0" id="e-trashwrap"${TRASH_OPEN?" open":""}><summary>${esc(t("trashH"))} (<span id="e-trashn">${TRASH?TRASH.length:0}</span>)</summary>
+      <p class="hint" style="margin:4px 0 8px">${esc(t("trashP"))}</p>
+      <div id="e-trashout"></div>
+    </details>`;
   $("#e-clsf").onchange=e=>{ CLS.filter=e.target.value; drawClass(); };
+  const tw=$("#e-trashwrap");
+  if(tw) tw.ontoggle=e=>{ TRASH_OPEN=e.target.open; if(TRASH_OPEN){ if(TRASH) drawTrash(); else loadTrash(); } };
+  if(TRASH_OPEN){ if(TRASH) drawTrash(); else loadTrash(); }
   const updDel=()=>{ const n=document.querySelectorAll(".rdel:checked").length; const s2=$("#e-deln"); if(s2) s2.textContent=n; };
   document.querySelectorAll(".rdel").forEach(c=>c.onchange=updDel); updDel();
   $("#e-del").onclick=async ()=>{
@@ -1628,10 +1636,10 @@ function drawClass(){
     const url=submitURL(), fails=[];
     for(const id of ids){
       try{
-        const r=await toWorker(url,{action:"delresult",code:TRCODE,id});
+        const r=await toWorker(url,{action:"trashresult",code:TRCODE,id});
         const j=await r.json().catch(()=>({}));
         if(r.ok&&j.ok) continue;
-        if(r.status===404) continue; // already gone: counts as deleted
+        if(r.status===404) continue; // already gone: counts as moved
         fails.push(id+(r.status===403?" \u2715":" ?"));
       }catch(e){ fails.push(id+" ?"); }
     }
@@ -1641,8 +1649,54 @@ function drawClass(){
     if(denied.length) doneMsg=t("delDeny");
     if(other.length) doneMsg+=(denied.length?" ":"")+t("delFail")+" "+other.join(", ");
     await fetchClass(); drawClass();
+    if(TRASH_OPEN) loadTrash();
     const m2=$("#e-delmsg"); if(m2) m2.textContent=doneMsg;
   };
+}
+
+/* ---------- trash (attempts moved out of the results table) ---------- */
+async function loadTrash(){
+  const out=$("#e-trashout"); if(!out) return;
+  out.innerHTML=`<p class="hint">${esc(t("clsBusy"))}</p>`;
+  const url=submitURL();
+  if(!url){ out.innerHTML=`<p class="hint">${esc(t("trNeedURL"))}</p>`; return; }
+  if(!TRCODE){ out.innerHTML=`<p class="hint">${esc(t("trNeedCode"))}</p>`; return; }
+  try{
+    const r=await toWorker(url,{action:"listtrash",code:TRCODE});
+    const j=await r.json().catch(()=>({}));
+    if(r.status===403){ out.innerHTML=`<p class="hint">${esc(t("delDeny"))}</p>`; return; }
+    if(!r.ok||!j.ok){ out.innerHTML=`<p class="hint">${esc(t("clsFail"))} (${r.status}${j.error?" "+j.error:""})</p>`; return; }
+    TRASH=j.records||[];
+    drawTrash();
+  }catch(e){ out.innerHTML=`<p class="hint">${esc(t("wkDown"))}</p>`; }
+}
+function drawTrash(){
+  const out=$("#e-trashout"); if(!out) return;
+  const n=$("#e-trashn"); if(n) n.textContent=(TRASH||[]).length;
+  const recs=TRASH||[];
+  if(!recs.length){ out.innerHTML=`<p class="hint">${esc(t("trashEmpty"))}</p>`; return; }
+  out.innerHTML=`<div class="tbl-scroll" style="max-height:240px"><table class="data"><thead><tr><th></th><th>${esc(t("thDate"))}</th><th>${esc(t("thName"))}</th><th>${esc(t("thClass"))}</th><th>${esc(t("thAtt"))}</th><th>${esc(t("thScore"))}</th><th></th><th></th></tr></thead>
+<tbody>${recs.map(r=>`<tr><td>${esc(r.id||"")}</td><td>${esc(fmtLocal(r.at))}</td><td>${esc(r.name||"")}</td><td>${esc(r.klass||"")}</td><td>#${r.attempt||1}</td><td>${fmtPts(r.score,r.pct)}${pts(r.n)}</td>
+<td><button class="btn" data-act="restore" data-id="${esc(r.id)}">${esc(t("trashRestore"))}</button></td>
+<td><button class="btn" data-act="purge" data-id="${esc(r.id)}">${esc(t("trashPurge"))}</button></td></tr>`).join("")}</tbody></table></div>
+<p class="hint" id="e-trashmsg" style="margin:6px 0 0"></p>`;
+  out.querySelectorAll("button[data-act]").forEach(btn=>{
+    btn.onclick=async()=>{
+      const id=btn.dataset.id, act=btn.dataset.act, msg=$("#e-trashmsg"); msg.textContent="";
+      if(act==="purge"&&!confirm(t("trashPurgeConf"))) return;
+      btn.disabled=true;
+      const url=submitURL();
+      try{
+        const r=await toWorker(url,{action:act==="restore"?"restore":"purgetrash",code:TRCODE,id});
+        const j=await r.json().catch(()=>({}));
+        btn.disabled=false;
+        if(!r.ok||!j.ok){ msg.textContent=(r.status===403?t("delDeny"):t("delFail")+" "+(j.error||r.status)); return; }
+        TRASH=recs.filter(x=>x.id!==id);
+        drawTrash();
+        if(act==="restore"){ await fetchClass(); drawClass(); } // re-renders the results table; TRASH is already updated, drawClass re-draws the trash section from it
+      }catch(e){ btn.disabled=false; msg.textContent=t("wkDown"); }
+    };
+  });
 }
 
 /* ---------- language ---------- */
