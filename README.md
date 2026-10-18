@@ -24,11 +24,17 @@ Same visual language as [Architecture Advisor](https://ncorticos.github.io/archi
 - **04 Resultados / Results** — local history of this device. Export, clear and
   the submit link are unlocked with the teacher code (3016). Once unlocked,
   typing the Worker's `TEACHER_CODE` and pressing Enter lists every attempt the
-  students sent to the Worker (without names), with the average by lecture and
-  by group; **Download CSV** exports them with names and a class-code column.
+  students sent to the Worker — name, class code, group, attempt, score, points
+  and time — grouped by lecture (Lecture00 last), with the average by lecture
+  and by group; **Download CSV** exports them with names and a class-code
+  column. A mistaken attempt is not deleted permanently: **Move to trash**
+  moves it to a Trash section below the table, where it can be **Restored** to
+  the results or **Deleted** for good (both need the Worker teacher code).
 
-Question bank v1.0.0: 348 questions extracted from lessons L.01–L.03 —
-Aula 1–3 (46/54/74, PT) + Lecture 1–3 (46/54/74, EN).
+Question bank: 1208 questions extracted from lessons L.00–L.07 —
+Aula 0–3 (103/46/54/74, PT, 277) + Lecture 0–7 (103/82/121/88/89/156/101/191,
+EN, 931). Lecture00 and Lecture01 are closed for new attempts; the teacher can
+still start one with the settings code 3016.
 
 ## Theoretical / LAB
 
