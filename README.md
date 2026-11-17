@@ -7,7 +7,7 @@ Randomised anti-copy classroom quizzes for architecture students —
 Live: https://ncorticos.github.io/ec-ee-machine/
 
 Single self-contained file (`index.html`, no build, no server, works offline).
-Same visual language as [Architecture Advisor](https://ncorticos.github.io/architecture-advisor-pt/).
+Same visual language as the EC&EE Course Book.
 
 - **01 Questionário / Quiz** — each student gets a different random subset of
   questions with shuffled A–D options, optional timer, score + review,
@@ -51,6 +51,14 @@ attempt). A `?uni=lisbon` or `?uni=warsaw` link sets it directly.
 - **Lisbon** — PT | EN switch (the PT bank has Aula 00–03; the other lectures
   are in English). Each university keeps its own language choice.
 - **Warsaw** — English only.
+
+Groups depend on the university: **Lisbon** students choose their degree —
+*Architecture* or *Architecture, Interiors and Renovation* (Arquitetura,
+Interiores e Reabilitação do Edificado); **Warsaw** students choose *Architects*
+or *Engineers*. The LAB groups are unchanged.
+
+The page uses the Course Book style: paper and ink with one ochre accent,
+Georgia for headings and questions, system sans for controls, light and dark.
 
 Each result records the university (`uni`: `lisbon` / `warsaw`); the class
 results table shows it under the class code, has a University filter, and the

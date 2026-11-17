@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.29.0 — 2026-11-17 (Lisbon)
+  EC&EE Machine 1.30.0 — 2026-11-17 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 1383 perguntas extraídas das aulas PPTX L.00–L.09 (EN) + L.00–L.03 (PT).
 
@@ -205,6 +205,97 @@ body.nouni .unigate{display:block}
 .unicard .usub{font-size:12.5px;color:var(--muted)}
 .unicard .ulang{margin-top:6px;font-size:11px;font-weight:600;letter-spacing:.06em;padding:2px 9px;border:1px solid var(--line);border-radius:20px;color:var(--muted)}
 .unigate .hint{margin-top:20px}
+
+/* ===== Course-book theme: paper and ink, one ochre accent (matches the EC&EE Course Book) ===== */
+:root{
+  --bg:#f6f4ef; --panel:#fbfaf6; --ink:#1d2326; --ink2:#3b4246; --muted:#5b6468; --faint:#8d9497;
+  --line:#d9d4c7; --line2:#e6e1d5; --wash:#ece8df; --nav:#ebe6da; --field:#fffdf8;
+  --accent:#9a5b13; --accentbg:#f3e6d3; --onaccent:#fffdf8;
+  --good:#3f6212; --goodbg:#e4eed3; --bad:#9f2420; --badbg:#f6dfdc;
+  --c1:#9a5b13;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#171b1d; --panel:#1c2124; --ink:#e8e6e1; --ink2:#cfccc5; --muted:#a2a9ab; --faint:#7b8386;
+    --line:#33393c; --line2:#2a3033; --wash:#21262a; --nav:#1d2225; --field:#14181a;
+    --accent:#e0a458; --accentbg:#3a2c18; --onaccent:#171b1d;
+    --good:#a3c76a; --goodbg:#243019; --bad:#ef8a80; --badbg:#3a1f1d;
+    --c1:#e0a458; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171b1d; --panel:#1c2124; --ink:#e8e6e1; --ink2:#cfccc5; --muted:#a2a9ab; --faint:#7b8386;
+  --line:#33393c; --line2:#2a3033; --wash:#21262a; --nav:#1d2225; --field:#14181a;
+  --accent:#e0a458; --accentbg:#3a2c18; --onaccent:#171b1d;
+  --good:#a3c76a; --goodbg:#243019; --bad:#ef8a80; --badbg:#3a1f1d;
+  --c1:#e0a458; color-scheme:dark;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans)}
+header{background:var(--bg);backdrop-filter:none;border-bottom:1px solid var(--line)}
+nav.tabs{background:var(--bg);border-bottom:1px solid var(--line)}
+.brand b{font-family:var(--serif);font-size:17px;font-weight:700;letter-spacing:0}
+.tab .n{color:var(--faint)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.langsel,.kindsel,.unichip{background:transparent;border-color:var(--line);border-radius:4px}
+.langsel button,.kindsel button{background:transparent;color:var(--muted);border-right-color:var(--line);min-height:30px}
+.langsel button:hover,.kindsel button:hover{background:var(--wash);color:var(--ink)}
+.langsel button[aria-pressed="true"],.kindsel button[aria-pressed="true"]{background:var(--accent);color:var(--onaccent)}
+.unichip{color:var(--ink);min-height:30px}
+.unichip:hover{background:var(--wash)}
+.pagehead h2{font-family:var(--serif);font-size:1.75rem;font-weight:700;letter-spacing:0;line-height:1.2}
+.pagehead p{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--muted)}
+.controls{background:var(--nav);border-color:var(--line);border-radius:4px}
+select,input[type=number],input[type=text],input[type=password],input[type=url]{background:var(--field);color:var(--ink);border-color:var(--line);border-radius:4px}
+select:focus,input:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
+.chk input{accent-color:var(--accent)}
+.btn{background:transparent;color:var(--ink2);border-color:var(--line);border-radius:4px}
+.btn:hover{background:var(--wash);color:var(--ink);border-color:var(--muted)}
+.btn:active{background:var(--wash)}
+.btn.solid{background:var(--accent);color:var(--onaccent);border-color:var(--accent);font-weight:600}
+.btn.solid:hover{background:var(--accent);color:var(--onaccent);filter:brightness(1.1)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.panel{background:var(--panel);border-color:var(--line);border-radius:6px}
+.panel-head{border-bottom-color:var(--line2)}
+.panel-title h3{font-family:var(--serif);font-size:16px;font-weight:700}
+.qtext{font-family:var(--serif);font-size:19px;font-weight:700;line-height:1.35;letter-spacing:0}
+.opt,.proj-opt{background:var(--field);color:var(--ink);border-color:var(--line);border-radius:4px}
+@media(hover:hover){.opt:not(.sel):hover,.proj-opt:not(.sel):not(:disabled):hover{border-color:var(--accent);background:var(--accentbg)}}
+.opt:not(.sel):active,.proj-opt:not(.sel):not(:disabled):active{border-color:var(--accent);background:var(--accentbg)}
+.opt.sel,.proj-opt.sel{border-color:var(--accent);background:var(--accentbg);box-shadow:0 0 0 1px var(--accent) inset}
+.opt .L,.proj-opt .L{border-color:var(--line);border-radius:3px}
+.opt.sel .L,.proj-opt.sel .L{background:var(--accent);color:var(--onaccent);border-color:var(--accent)}
+.proj-q{font-family:var(--serif);font-weight:700;letter-spacing:0}
+.progress>i{background:var(--accent)}
+.stat{border-color:var(--line);border-radius:4px;background:var(--panel)}
+.stat .v{color:var(--ink)}
+.pill{border-radius:3px}
+.pill.idle{background:var(--wash);color:var(--muted)}
+table.data th{color:var(--muted);border-bottom-color:var(--line)}
+table.data th,table.data td{border-bottom-color:var(--line2)}
+table.data td.num,table.data th.num{color:var(--ink2)}
+table.data tbody tr:hover{background:var(--wash)}
+table.data tr.trk td{background:var(--nav);border-bottom-color:var(--line)}
+.overbanner{border-radius:2px;border:0;border-left:3px solid var(--bad)}
+.reqpanel{border-color:var(--line);border-radius:4px;background:var(--panel)}
+footer{border-top-color:var(--line);color:var(--muted)}
+code.mono{background:var(--wash);border-color:var(--line2)}
+#b-trout [contenteditable]:hover,#b-trout [contenteditable]:focus{outline-color:var(--accent);background:var(--accentbg)}
+.ptimer.g{color:var(--good)}.ptimer.y{color:var(--accent)}
+.tbar{background:var(--line2)}
+.leavebanner{background:var(--panel);border:0;border-left:3px solid var(--accent);border-radius:2px;color:var(--ink);font-size:13.5px;padding:.7rem 1rem}
+.unigate h1{font-family:var(--serif);font-size:2rem;font-weight:700;letter-spacing:0}
+.unigate .sub{font-family:var(--serif);font-style:italic}
+.unicard{background:var(--panel);border-color:var(--line);border-radius:6px;color:var(--ink)}
+.unicard:hover,.unicard:focus-visible{border-color:var(--accent);box-shadow:0 6px 22px rgba(60,40,10,.10)}
+.unicard b{font-family:var(--serif);font-size:19px;font-weight:700;letter-spacing:0}
+.unicard .ulang{border-color:var(--accent);color:var(--accent)}
+.unicard .ulogo{background:#f6f4ef;border-radius:4px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .unichip img.inv{filter:none}:root:not([data-theme="light"]) .unichip img:not(.inv){background:#f6f4ef;border-radius:2px;padding:1px 2px;box-sizing:content-box}}
+:root[data-theme="dark"] .unichip img.inv{filter:none}
+:root[data-theme="dark"] .unichip img:not(.inv){background:#f6f4ef;border-radius:2px;padding:1px 2px;box-sizing:content-box}
 </style>
 </head>
 <body>
@@ -238,7 +329,7 @@ body.nouni .unigate{display:block}
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.09 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.29.0 · 2026-11-17</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.09 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.30.0 · 2026-11-17</span></footer>
 </main>
 <script>
 "use strict";
@@ -273,7 +364,7 @@ pt:{
  netFail:"Falha de rede — tente de novo.",
  submitLink:"Ligação de envio", submitSet:"Guardar", submitSaved:"Ligação guardada.",
  submitP:"Cole aqui a ligação de envio dada pelo docente (uma vez por dispositivo).",
- grpArch:"Arquitetos", grpEng:"Engenheiros", kindTheory:"Teórica", kindLab:"LAB", kindAria:"Tipo de sessão", labGroup:"Grupo de laboratório",
+ grpArch:"Arquitetos", grpEng:"Engenheiros", grpArq:"Arquitetura", grpInt:"Arquitetura, Interiores e Reabilitação do Edificado", kindTheory:"Teórica", kindLab:"LAB", kindAria:"Tipo de sessão", labGroup:"Grupo de laboratório",
  rosterH:"Grupos de laboratório", rosterStud:"alunos", rosterP:"Os nomes estão no código da página (LAB_GROUPS em index.html), que é público; para mudar um grupo, edite essa lista.",
  lockB:"Definições", codeL:"Código", unlockedMsg:"Desbloqueado — volte a bloquear antes da aula.",
  wrongCode:"Código incorreto.", triesLeft:"tentativas restantes.",
@@ -344,7 +435,7 @@ en:{
  netFail:"Network error — try again.",
  submitLink:"Submit link", submitSet:"Save", submitSaved:"Link saved.",
  submitP:"Paste here the submit link given by your teacher (once per device).",
- grpArch:"Architects", grpEng:"Engineers", kindTheory:"Theoretical", kindLab:"LAB", kindAria:"Session type", labGroup:"Lab group",
+ grpArch:"Architects", grpEng:"Engineers", grpArq:"Architecture", grpInt:"Architecture, Interiors and Renovation", kindTheory:"Theoretical", kindLab:"LAB", kindAria:"Session type", labGroup:"Lab group",
  rosterH:"Lab groups", rosterStud:"students", rosterP:"Names are in the page code (LAB_GROUPS in index.html), which is public; to change a group, edit that list.",
  lockB:"Settings", codeL:"Code", unlockedMsg:"Unlocked — re-lock before class.",
  wrongCode:"Wrong code.", triesLeft:"attempts left.",
@@ -422,7 +513,7 @@ const DEF = (()=>{
     lessonFixed: okL.includes(g.lesson), // a ?lesson= link fixes the lecture; a plain link lets students choose
     n: okN.includes(n)?n:20,
     mins: okM.includes(m)?m:15,
-    group: ["architects","engineers"].includes(g.group)?g.group:"",
+    group: ["architects","engineers","architecture","interiors"].includes(g.group)?g.group:"",
     mode: g.mode==="quiz"?"quiz":"proj",
     code: String(g.code||"").slice(0,40)
   };
@@ -526,7 +617,12 @@ function setKind(k){ // LAB: submissions only (no lectures or quizzes); Theoreti
 const PTS_MAX = 5;
 const pts = (score, n) => (+n > 0 ? (+score || 0) / +n * PTS_MAX : 0);
 const fmtPts = v => (Math.round(v * 100) / 100).toFixed(2).replace(/\.?0+$/, "");
-function grpLabel(v){ return v==="architects"?t("grpArch"):v==="engineers"?t("grpEng"):v||""; }
+// Groups depend on the university: Lisbon = degree (Architecture / Architecture, Interiors and Renovation), Warsaw = Architects / Engineers
+const GROUPS = {lisbon:[["architecture","grpArq"],["interiors","grpInt"]], warsaw:[["architects","grpArch"],["engineers","grpEng"]]};
+const GRP_KEY = {architecture:"grpArq", interiors:"grpInt", architects:"grpArch", engineers:"grpEng"};
+function grpLabel(v){ return GRP_KEY[v]?t(GRP_KEY[v]):v||""; }
+function groupOptions(sel){ const list=(typeof UNI!=="undefined" && GROUPS[UNI]) || GROUPS.warsaw;
+  return list.map(([v,k])=>`<option value="${v}"${v===sel?" selected":""}>${esc(t(k))}</option>`).join(""); }
 
 /* ---------- tabs ---------- */
 let TAB = KIND==="lab" ? "lab" : "quiz";
@@ -582,7 +678,7 @@ function renderQuiz(){
         <span class="ctl"><label>${esc(t("nq"))}</label>
           <select id="c-n">${[20,30,40,50].map(v=>`<option value="${v}"${v===selN?" selected":""}${v>bankSize?" disabled":""}>${v}</option>`).join("")}</select></span>
         <span class="ctl"><label>${esc(t("name"))}</label><input type="text" id="c-name" name="qm-student-nm" placeholder="—" value="" autocomplete="off" autocorrect="off" autocapitalize="words" spellcheck="false" data-1p-ignore data-lpignore="true" data-form-type="other"></span>
-        <span class="ctl"><label>${esc(t("klass"))}</label><select id="c-klass"><option value="">—</option><option value="architects"${selG==="architects"?" selected":""}>${esc(t("grpArch"))}</option><option value="engineers"${selG==="engineers"?" selected":""}>${esc(t("grpEng"))}</option></select></span>
+        <span class="ctl"><label>${esc(t("klass"))}</label><select id="c-klass"><option value="">—</option>${groupOptions(selG)}</select></span>
         <label class="chk"><input type="checkbox" id="c-sq" checked> ${esc(t("shufQ"))}</label>
         <label class="chk"><input type="checkbox" id="c-so" checked> ${esc(t("shufO"))}</label>
         <label class="chk"><input type="checkbox" id="c-ob" checked> ${esc(t("oneBy"))}</label>
