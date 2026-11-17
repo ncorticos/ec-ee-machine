@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.27.1 — 2026-11-17 (Lisbon)
+  EC&EE Machine 1.28.0 — 2026-11-17 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 1383 perguntas extraídas das aulas PPTX L.00–L.09 (EN) + L.00–L.03 (PT).
 
@@ -184,6 +184,8 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
 .hlogo.extra{cursor:default}
 .hlogo.extra svg{filter:grayscale(1) brightness(1.9);opacity:.4}
 input.pw{-webkit-text-security:disc;text-security:disc}
+.leavebanner{margin:10px 0;padding:8px 12px;border-radius:10px;border:1px solid #e0a800;background:#fff6d6;color:#6b4e00;font-size:13px}
+@media (prefers-color-scheme:dark){.leavebanner{background:#3a3000;color:#ffe08a;border-color:#8a6d00}}
 </style>
 </head>
 <body>
@@ -207,7 +209,7 @@ input.pw{-webkit-text-security:disc;text-security:disc}
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.09 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.27.1 · 2026-11-17</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.09 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.28.0 · 2026-11-17</span></footer>
 </main>
 <script>
 "use strict";
@@ -269,7 +271,7 @@ pt:{
  trLoaded:"Carregado de bank-pt.json — pode corrigir e descarregar de novo.",
  trEmpty:"Há campos em português vazios — preencha-os antes de descarregar.",
  trSaved:"bank-pt.json descarregado — carregue-o na raiz do repositório ec-ee-machine.",
- projDone:"Respondeu a todas as perguntas.", answered:"Respondidas",
+ projDone:"Respondeu a todas as perguntas.", leaveWarn:"Não saia desta página: mudar de separador ou de aplicação, ou fechar a página, termina a tentativa e envia-a tal como está.", leaveConfirm:"Depois de começar, sair desta página (outro separador, outra aplicação ou fechar) termina a tentativa e envia-a tal como está. Começar?", leftDone:"Saiu da página — a tentativa foi terminada e enviada.", answered:"Respondidas",
  srvFail:"O Worker não conseguiu guardar o resultado — mostre esta mensagem ao docente",
  sendAgain:"Enviar de novo", codeRejected:"O Worker de resultados não aceita o código da turma — docente: acrescente-o a CLASS_CODE no Cloudflare:",
  wkCrash:"O Worker responde, mas falhou ao guardar. Docente: cole de novo o worker.js mais recente no Cloudflare e veja os Logs do Worker.",
@@ -340,7 +342,7 @@ en:{
  trLoaded:"Loaded from bank-pt.json — you can correct it and download again.",
  trEmpty:"Some Portuguese fields are empty — fill them in before downloading.",
  trSaved:"bank-pt.json downloaded — upload it to the root of the ec-ee-machine repository.",
- projDone:"You have answered all the questions.", answered:"Answered",
+ projDone:"You have answered all the questions.", leaveWarn:"Stay on this page: switching to another tab or app, or closing the page, ends your attempt and submits it as it is.", leaveConfirm:"Once you start, leaving this page (another tab, another app, or closing it) ends your attempt and submits it as it is. Start?", leftDone:"You left the page — your attempt was ended and submitted.", answered:"Answered",
  srvFail:"The Worker could not save the result — show this message to your teacher",
  sendAgain:"Send again", codeRejected:"The results Worker does not accept the class code — teacher: add it to CLASS_CODE in Cloudflare:",
  wkCrash:"The Worker answers but failed while saving. Teacher: re-paste the latest worker.js in Cloudflare and check the Worker's Logs.",
@@ -367,7 +369,7 @@ const BAKED_SUBMIT = "https://quiz-results.ncorticos.workers.dev"; // results Wo
 // POST to the Worker as text/plain: a "simple" cross-site request, so the browser sends no CORS preflight
 // (the Worker still parses the body as JSON). Older deployed Workers crashed on the preflight.
 function toWorker(url, obj){
-  return fetch(url,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(obj)});
+  return fetch(url,{method:"POST",keepalive:true,headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(obj)});
 }
 function submitURL(){
   try{
@@ -580,6 +582,8 @@ function renderQuiz(){
       if(lessonBlocked(LESSON_SEL)){ $("#c-warn").textContent=t("lessonClosed"); return; }
       if(!nm || !kg){ $("#c-warn").textContent=t("needId"); return; }
       try{ localStorage.setItem("qm_name",nm); localStorage.setItem("qm_group",kg); }catch(e){}
+      const fresh = DEF.mode==="quiz" || !S || (S.done && S.lesson!==LESSON_SEL);
+      if(fresh && !confirm(t("leaveConfirm"))) return;
       if(DEF.mode==="quiz"){ startQuiz(); return; }
       // an attempt in progress, or a finished one of the same lecture, is resumed (restart = teacher code)
       if(!S || (S.done && S.lesson!==LESSON_SEL)) startSession(nm,kg);
@@ -853,7 +857,7 @@ function renderAttempt(el){
        <button class="btn solid" id="q-fin" style="margin-left:auto">${esc(t("finish"))}</button></div>
        <p class="hint" id="q-warn"></p></div></div>`;
   }
-  el.innerHTML = `<div class="pagehead"><h2>${esc(t("quizH"))}</h2></div>` + body;
+  el.innerHTML = `<div class="pagehead"><h2>${esc(t("quizH"))}</h2></div><div class="leavebanner">⚠ ${esc(t("leaveWarn"))}</div>` + body;
   el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
     if(Q.oneBy) Q.ans[Q.i]=parseInt(b.dataset.k,10);
     else Q.ans[parseInt(b.dataset.i,10)]=parseInt(b.dataset.k,10);
@@ -873,7 +877,7 @@ function finishQuiz(auto){
   const A=Q;
   autoSend(A, ()=>{ if(Q===A) renderSendPanel(); });
   renderQuiz();
-  if(auto) setTimeout(()=>alert(t("timeout")),50);
+  if(auto && !A.leftPage) setTimeout(()=>alert(t("timeout")),50);
 }
 function renderResult(el){
   const pct=(Q.score/Q.n*100);
@@ -921,7 +925,7 @@ function resultPayload(code,A){ // A: attempt (quiz Q or projector S)
   return {code, id:A.id, name:A.name, klass:A.klass, lesson:LESSON[LANG][A.lesson],
     n:A.n, score:A.score, pct:+(A.score/A.n*100).toFixed(1), secs:A.secs,
     date:new Date().toISOString(),
-    detail:A.items.map((it,i)=>`${it.src+1}:${A.ans[i]===undefined?"-":LETTERS[A.ans[i]]}${A.ans[i]===it.correct?"✓":"✗"}`).join(" ")};
+    detail:A.items.map((it,i)=>`${it.src+1}:${A.ans[i]===undefined?"-":LETTERS[A.ans[i]]}${A.ans[i]===it.correct?"✓":"✗"}`).join(" ")+(A.leftPage?" [left page]":"")};
 }
 /* ---------- sending results: automatic, no code to type ---------- */
 // Class code sent with a result: a ?code= link wins, otherwise the lecture itself (aula2 -> "Lecture02"),
@@ -999,6 +1003,20 @@ function finishSession(timedOut){
   autoSend(A, ()=>{ if(TAB==="proj" && S===A) renderProj(); });
   if(TAB==="proj") renderProj();
 }
+/* leaving the page during an attempt ends it and submits it (students are warned at Proceed and by a banner) */
+function liveAttempt(){ return (S && !S.done) ? S : (typeof Q!=="undefined" && Q && Q.items && !Q.done) ? Q : null; }
+function leavePage(ev){
+  const A=liveAttempt(); if(!A) return;
+  if(ev && ev.type==="visibilitychange" && window._mailT && Date.now()-window._mailT<8000) return; // restart-request e-mail
+  A.leftPage=true; window._leftMsg=true;
+  if(A===S) finishSession(false); else finishQuiz(true);
+}
+document.addEventListener("visibilitychange", e=>{
+  if(document.visibilityState==="hidden") leavePage(e);
+  else if(window._leftMsg){ window._leftMsg=false; setTimeout(()=>alert(t("leftDone")),50); }
+});
+window.addEventListener("pagehide", leavePage);
+window.addEventListener("beforeunload", e=>{ if(liveAttempt()){ e.preventDefault(); e.returnValue=""; } });
 function pBand(rem){ return rem>600?"g":rem>=300?"y":"r"; }
 function pTick(){
   const tm=$("#p-timer"), bar=$("#p-bar");
@@ -1051,6 +1069,7 @@ function renderProj(){
       <div class="barrow"><span class="bl">${esc(t("qLeft"))}</span><div class="tbar"><i id="p-qbar" class="${qBand(S.n-Object.keys(S.ans).length,S.n)}" style="width:${((S.n-Object.keys(S.ans).length)/S.n*100).toFixed(1)}%"></i></div><span class="bv" id="p-qleft">${S.n-Object.keys(S.ans).length}/${S.n}</span></div>
       <div class="barrow"><span class="bl">${esc(t("tLeft"))}</span><div class="tbar"><i id="p-bar" class="${b}" style="width:${P.endsAt?(rem/total*100).toFixed(1):100}%"></i></div><span class="bv" id="p-tleft">${fmtTime(rem)}</span></div>
     </div>`:`<div class="tbar"><i id="p-bar" class="${b}" style="width:${P.endsAt?(rem/total*100).toFixed(1):100}%"></i></div>`}
+    ${sess?`<div class="leavebanner">⚠ ${esc(t("leaveWarn"))}</div>`:""}
     ${P.over?`<div class="overbanner">${esc(t("overT"))} — ${esc(t("overP"))}</div>`:""}
     <div class="panel"><div class="panel-body" id="p-card"></div></div>
     <div class="reqpanel" id="p-req" style="display:none">
@@ -1098,7 +1117,7 @@ ${location.href.split("?")[0]}`;
     if(pe){ mail.href=`mailto:${pe}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`; mail.style.display=""; msg.textContent=""; }
     else{ mail.style.display="none"; msg.textContent=t("noProf"); }
   }
-  $("#p-mail").onclick=()=>{ $("#p-reqmsg").textContent=t("reqSent"); };
+  $("#p-mail").onclick=()=>{ window._mailT=Date.now(); $("#p-reqmsg").textContent=t("reqSent"); };
   $("#p-code").onkeydown=e=>{ if(e.key==="Enter") $("#p-codeok").click(); };
   $("#p-codeok").onclick=()=>{
     const inp=$("#p-code"), msg=$("#p-reqmsg");
@@ -1156,7 +1175,7 @@ function projAdvance(){
 }
 function projEndHTML(){ // score only: the correct answers stay behind the teacher code
   const pct=S.score/S.n*100, pass=pct>=50, answered=Object.keys(S.ans).length;
-  return `<p class="qtext">${esc(S.timedOut?t("timeout"):t("projDone"))}</p>
+  return `<p class="qtext">${esc(S.leftPage?t("leftDone"):S.timedOut?t("timeout"):t("projDone"))}</p>
     <div class="grid g4">
       <div class="stat"><div class="k">${esc(t("score"))}</div><div class="v">${S.score}<small>/${S.n} · ${pct.toFixed(0)}%</small></div>
         <div class="s"><span class="pill ${pass?"ok":"bad"}">${esc(t(pass?"pass":"fail"))}</span> ${fmtPts(pts(S.score,S.n))}/${PTS_MAX} ${esc(t("ptsUnit"))}</div></div>
@@ -1338,7 +1357,7 @@ function resultRow(A){
   return {date:d.toISOString().slice(0,16).replace("T"," "),
     name:A.name||"", klass:A.klass||"", lesson:LESSON[LANG][A.lesson],
     id:A.id, n:A.n, score:A.score, pct:+(A.score/A.n*100).toFixed(1), secs:A.secs,
-    detail:A.items.map((it,i)=>`${it.src+1}:${A.ans[i]===undefined?"-":LETTERS[A.ans[i]]}${A.ans[i]===it.correct?"✓":"✗"}`).join(" ")};
+    detail:A.items.map((it,i)=>`${it.src+1}:${A.ans[i]===undefined?"-":LETTERS[A.ans[i]]}${A.ans[i]===it.correct?"✓":"✗"}`).join(" ")+(A.leftPage?" [left page]":"")};
 }
 function csvEsc(v){
   v=v==null?"":String(v);

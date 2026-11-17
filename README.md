@@ -17,7 +17,10 @@ Same visual language as [Architecture Advisor](https://ncorticos.github.io/archi
   answers N random questions (20 by default, `?n=30|40|50`), one at a time: choosing an answer
   moves to the next question; after the last one (or when time is up) the
   student sees the score, without the correct answers, and the result is
-  sent to the teacher. A new attempt needs the teacher code (Request restart).
+  sent to the teacher. Leaving the page during an attempt (another tab or
+  app, or closing it) ends the attempt and submits it as it is; students are
+  warned before they start and by a banner while they answer, and the stored
+  detail ends with `[left page]`. A new attempt needs the teacher code (Request restart).
   Opened directly, the tab shows one random question at a time for the room,
   alongside the lesson PPTX, with no repeats until the bank is exhausted.
 - **03 Banco / Bank** — searchable teacher view of all questions + answers.
