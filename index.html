@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.27.0 — 2026-11-17 (Lisbon)
+  EC&EE Machine 1.27.1 — 2026-11-17 (Lisbon)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 1383 perguntas extraídas das aulas PPTX L.00–L.09 (EN) + L.00–L.03 (PT).
 
@@ -183,6 +183,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
 .hlogo.sel .hc{color:var(--ink);font-weight:700}
 .hlogo.extra{cursor:default}
 .hlogo.extra svg{filter:grayscale(1) brightness(1.9);opacity:.4}
+input.pw{-webkit-text-security:disc;text-security:disc}
 </style>
 </head>
 <body>
@@ -206,7 +207,7 @@ code.mono{font-family:var(--mono);font-size:11px;background:var(--wash);border:1
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.09 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.27.0 · 2026-11-17</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.09 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.27.1 · 2026-11-17</span></footer>
 </main>
 <script>
 "use strict";
@@ -549,7 +550,7 @@ function renderQuiz(){
         <span class="ctl"><label>${esc(t("bank"))}</label><select id="c-lesson"${lockL?" disabled":""}>${lessonOptions(defLesson)}</select></span>
         <span class="ctl"><label>${esc(t("nq"))}</label>
           <select id="c-n">${[20,30,40,50].map(v=>`<option value="${v}"${v===selN?" selected":""}${v>bankSize?" disabled":""}>${v}</option>`).join("")}</select></span>
-        <span class="ctl"><label>${esc(t("name"))}</label><input type="text" id="c-name" placeholder="—" autocomplete="off" spellcheck="false"></span>
+        <span class="ctl"><label>${esc(t("name"))}</label><input type="text" id="c-name" name="qm-student-nm" placeholder="—" value="" autocomplete="off" autocorrect="off" autocapitalize="words" spellcheck="false" data-1p-ignore data-lpignore="true" data-form-type="other"></span>
         <span class="ctl"><label>${esc(t("klass"))}</label><select id="c-klass"><option value="">—</option><option value="architects"${selG==="architects"?" selected":""}>${esc(t("grpArch"))}</option><option value="engineers"${selG==="engineers"?" selected":""}>${esc(t("grpEng"))}</option></select></span>
         <label class="chk"><input type="checkbox" id="c-sq" checked> ${esc(t("shufQ"))}</label>
         <label class="chk"><input type="checkbox" id="c-so" checked> ${esc(t("shufO"))}</label>
@@ -558,7 +559,7 @@ function renderQuiz(){
         <button class="btn solid" id="c-start" disabled>${esc(t("start"))}</button>
         <button class="btn" id="c-lock" title="${esc(t("lockB"))}">${UNLOCKED?"🔓":"🔒"}</button>
         <span class="hint" id="c-warn"></span>
-        <span class="ctl" id="c-codewrap" style="display:none"><label>${esc(t("codeL"))}</label><input type="password" id="c-code" style="width:110px" autocomplete="off"><button class="btn" id="c-codeok">OK</button></span>
+        <span class="ctl" id="c-codewrap" style="display:none"><label>${esc(t("codeL"))}</label><input type="text" class="pw" data-1p-ignore data-lpignore="true" data-form-type="other" id="c-code" style="width:110px" autocomplete="off"><button class="btn" id="c-codeok">OK</button></span>
         <span class="hint" id="c-lockmsg"></span>
       </div>
       <div id="q-result"></div>`;
@@ -596,7 +597,8 @@ function renderQuiz(){
     $("#c-name").oninput=gate; $("#c-klass").oninput=gate; gate();
     const cleanName=()=>{ const n=$("#c-name"); if(n && /^(https?:\/\/|www\.)/i.test(n.value.trim())){ n.value=""; gate(); }
       try{ const s=localStorage.getItem("qm_name")||""; if(/^(https?:\/\/|www\.)/i.test(s.trim())) localStorage.removeItem("qm_name"); }catch(e){} };
-    setTimeout(cleanName, 400); // catches browser-restored junk after load
+    [0,400,1200,3000].forEach(ms=>setTimeout(cleanName, ms)); // catches browser autofill / restored junk after load
+    $("#c-name").addEventListener("change", cleanName);
     $("#c-name").addEventListener("focus", cleanName);
     if(Q && Q.done) renderResult($("#q-result"));
   } else {
@@ -1054,7 +1056,7 @@ function renderProj(){
     <div class="reqpanel" id="p-req" style="display:none">
       <div class="qnav" style="margin-top:0">
         <a class="btn solid" id="p-mail" href="#">${esc(t("reqAsk"))}</a>
-        <span class="ctl"><label>${esc(t("profUn"))}</label><input type="password" id="p-code" style="width:110px" autocomplete="off"><button class="btn" id="p-codeok">OK</button></span>
+        <span class="ctl"><label>${esc(t("profUn"))}</label><input type="text" class="pw" data-1p-ignore data-lpignore="true" data-form-type="other" id="p-code" style="width:110px" autocomplete="off"><button class="btn" id="p-codeok">OK</button></span>
       </div>
       <p class="hint" id="p-reqmsg" style="margin-bottom:0"></p>
     </div>
@@ -1173,7 +1175,7 @@ function renderBank(filter){
     <div class="panel"><div class="panel-body">
       <p class="qtext">🔒 ${esc(t("bankLocked"))}</p>
       <div class="controls" style="margin:0">
-        <span class="ctl"><label>${esc(t("codeL"))}</label><input type="password" id="b-code" style="width:130px" autocomplete="off"><button class="btn" id="b-codeok">OK</button></span>
+        <span class="ctl"><label>${esc(t("codeL"))}</label><input type="text" class="pw" data-1p-ignore data-lpignore="true" data-form-type="other" id="b-code" style="width:130px" autocomplete="off"><button class="btn" id="b-codeok">OK</button></span>
       </div>
       <p class="hint" id="b-lockmsg" style="margin-bottom:0"></p>
     </div></div>`;
@@ -1213,7 +1215,7 @@ function renderBank(filter){
     <div class="panel"><div class="panel-head"><div class="panel-title"><h3>${esc(t("trH"))}</h3><p>${esc(t("trP"))}</p></div></div>
       <div class="panel-body">
         <div class="controls" style="margin:0">
-          <span class="ctl"><label>${esc(t("trCode"))}</label><input type="password" id="b-tcode" style="width:130px" autocomplete="off"></span>
+          <span class="ctl"><label>${esc(t("trCode"))}</label><input type="text" class="pw" data-1p-ignore data-lpignore="true" data-form-type="other" id="b-tcode" style="width:130px" autocomplete="off"></span>
           <button class="btn solid" id="b-tr">${esc(t("trGo"))} — ${esc(LESSON[LANG][bk])}</button>
           <button class="btn" id="b-trdl">${esc(t("trDl"))}</button>
           <span class="hint" id="b-trmsg"></span>
@@ -1368,7 +1370,7 @@ function renderRes(){
       <span class="meta">${all.length}</span>`}
       ${UNLOCKED
         ? `<button class="btn" id="e-lock" title="${esc(t("lockB"))}">🔓</button>`
-        : `<span class="ctl"><label>🔒 ${esc(t("codeL"))}</label><input type="password" id="e-code" style="width:110px" autocomplete="off"><button class="btn" id="e-codeok">OK</button></span>
+        : `<span class="ctl"><label>🔒 ${esc(t("codeL"))}</label><input type="text" class="pw" data-1p-ignore data-lpignore="true" data-form-type="other" id="e-code" style="width:110px" autocomplete="off"><button class="btn" id="e-codeok">OK</button></span>
            <span class="hint" id="e-lockmsg">${esc(t("resLocked"))}</span>`}
     </div>
     <div class="controls">
@@ -1378,7 +1380,7 @@ function renderRes(){
     </div>`+
     (!UNLOCKED?"":`<div class="panel"><div class="panel-head"><div class="panel-title"><h3>${esc(t(LAB?"labPanH":"clsH"))}</h3><p>${esc(t(LAB?"labPanP":"clsP"))}</p></div></div>
       <div class="panel-body"><div class="controls" style="margin:0">
-        <span class="ctl"><label>${esc(t("trCode"))}</label><input type="password" id="e-tcode" style="width:150px" autocomplete="off" placeholder="${esc(t("tcHint"))}"></span>
+        <span class="ctl"><label>${esc(t("trCode"))}</label><input type="text" class="pw" data-1p-ignore data-lpignore="true" data-form-type="other" id="e-tcode" style="width:150px" autocomplete="off" placeholder="${esc(t("tcHint"))}"></span>
         ${LAB?"":`<button class="btn" id="e-cls">${esc(t("clsGo"))}</button>`}
         ${tcodeLoad()?`<button class="btn" id="e-tforget">${esc(t("tcForget"))}</button>`:""}
         <span class="hint" id="e-clsmsg"></span>
