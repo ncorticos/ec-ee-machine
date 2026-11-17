@@ -133,7 +133,7 @@ async function translate(b, env) {
 const pickRecord = (o) => o && typeof o === "object" && typeof o.id === "string" ? {
   id: o.id, date: String(o.date || ""), class: String(o.class || ""), name: String(o.name || ""),
   group: String(o.group || ""), bank: String(o.bank || ""), n: o.n, score: o.score, pct: o.pct,
-  secs: o.secs || 0, detail: String(o.detail || ""),
+  secs: o.secs || 0, detail: String(o.detail || ""), uni: String(o.uni || ""),
 } : null;
 const parseRecord = (text) => { try { return pickRecord(JSON.parse(text)); } catch { return null; } };
 
@@ -266,6 +266,7 @@ async function handle(req, env) {
     bank: String(lesson || "").slice(0, 80),
     n, score, pct, secs: secs || 0,
     detail: String(detail || "").slice(0, 2000),
+    uni: b.uni === "lisbon" || b.uni === "warsaw" ? b.uni : "",
   };
   if (!env.GITHUB_TOKEN || !env.REPO.includes("/")) return json({ ok: false, error: "setup" }, 500);
   const path = `results/${id}.json`;

@@ -40,6 +40,23 @@ Aula 0–3 (103/46/54/74, PT, 277) + Lecture 0–9
 Daylighting, Lecture09 is Acoustics. Lecture00 and Lecture01 are closed for new attempts; the teacher can
 still start one with the settings code 3016.
 
+## Universities
+
+The first screen asks students which university they belong to:
+**Lisbon School of Architecture** (Faculdade de Arquitetura, Universidade de
+Lisboa) or **Warsaw University of Life Sciences** (SGGW). The choice is kept on
+the device and shown in the top bar, where it can be changed (not during an
+attempt). A `?uni=lisbon` or `?uni=warsaw` link sets it directly.
+
+- **Lisbon** — PT | EN switch (the PT bank has Aula 00–03; the other lectures
+  are in English). Each university keeps its own language choice.
+- **Warsaw** — English only.
+
+Each result records the university (`uni`: `lisbon` / `warsaw`); the class
+results table shows it under the class code, has a University filter, and the
+class CSV has a `university` column. Class codes stay `Lecture00`…`Lecture09`.
+Both logos are embedded in `index.html`, so the page still works offline.
+
 ## Theoretical / LAB
 
 The header switch (same style as EN | PT) sets the session type on each device;
