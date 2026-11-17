@@ -31,9 +31,10 @@ Same visual language as [Architecture Advisor](https://ncorticos.github.io/archi
   moves it to a Trash section below the table, where it can be **Restored** to
   the results or **Deleted** for good (both need the Worker teacher code).
 
-Question bank: 1208 questions extracted from lessons L.00–L.07 —
-Aula 0–3 (103/46/54/74, PT, 277) + Lecture 0–7 (103/82/121/88/89/156/101/191,
-EN, 931). Lecture00 and Lecture01 are closed for new attempts; the teacher can
+Question bank: 1383 questions extracted from lessons L.00–L.09 —
+Aula 0–3 (103/46/54/74, PT, 277) + Lecture 0–9
+(103/82/121/88/89/156/101/191/106/69, EN, 1106). Lecture08 is Lighting &
+Daylighting, Lecture09 is Acoustics. Lecture00 and Lecture01 are closed for new attempts; the teacher can
 still start one with the settings code 3016.
 
 ## Theoretical / LAB
