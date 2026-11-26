@@ -138,6 +138,47 @@ const pickRecord = (o) => o && typeof o === "object" && typeof o.id === "string"
 const parseRecord = (text) => { try { return pickRecord(JSON.parse(text)); } catch { return null; } };
 
 // Every attempt in quiz-results/results/: one GraphQL call for the whole folder, REST file by file as fallback.
+/* ---------- names already used (Warsaw): suggestions for the Name box ---------- */
+// Learned from the attempts stored in results/: each student picks the same spelling next time.
+let NAMES = null, NAMES_AT = 0;
+const foldName = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
+async function knownNames(env) {
+  if (NAMES && Date.now() - NAMES_AT < 5 * 60 * 1000) return NAMES;
+  const [owner, name] = String(env.REPO).split("/");
+  const r = await fetch(`${GH}/graphql`, {
+    method: "POST",
+    headers: ghHeaders(env),
+    body: JSON.stringify({
+      query: `query($o:String!,$n:String!){repository(owner:$o,name:$n){object(expression:"HEAD:results"){... on Tree{entries{name object{... on Blob{text}}}}}}}`,
+      variables: { o: owner, n: name },
+    }),
+  });
+  const j = await r.json();
+  if (!r.ok || j.errors || !j.data || !j.data.repository) throw new Error("names");
+  const entries = (j.data.repository.object && j.data.repository.object.entries) || [];
+  const seen = new Map(); // folded name -> {name, n}: the spelling used most often wins
+  for (const e of entries) {
+    const rec = e.name.endsWith(".json") && e.object && e.object.text ? parseRecord(e.object.text) : null;
+    if (!rec || rec.uni === "lisbon") continue;
+    const nm = rec.name.replace(/\s+/g, " ").trim();
+    if (!/\p{L}/u.test(nm) || /^(https?:\/\/|www\.)/i.test(nm)) continue;
+    const k = foldName(nm), cur = seen.get(k) || { counts: new Map() };
+    cur.counts.set(nm, (cur.counts.get(nm) || 0) + 1); seen.set(k, cur);
+  }
+  NAMES = [...seen.entries()].map(([key, v]) => ({ key, name: [...v.counts.entries()].sort((a, b2) => b2[1] - a[1])[0][0] }))
+    .sort((a, b2) => a.key.localeCompare(b2.key));
+  NAMES_AT = Date.now();
+  return NAMES;
+}
+// Names whose words start with every typed word (one letter is enough), at most 8.
+async function names(b, env) {
+  const q = foldName(b.q).slice(0, 60), words = q.split(" ").filter(Boolean);
+  if (!words.length || !env.GITHUB_TOKEN || !String(env.REPO).includes("/")) return json({ ok: true, list: [] });
+  const list = await knownNames(env);
+  const hit = list.filter(x => { const nw = x.key.split(" "); return words.every(w => nw.some(n => n.startsWith(w))); });
+  return json({ ok: true, list: hit.slice(0, 8).map(x => x.name) });
+}
+
 async function classResults(b, env) {
   if (!env.TEACHER_CODE) return json({ ok: false, error: "code", detail: "TEACHER_CODE not set" }, 403);
   if (b.code !== env.TEACHER_CODE) return json({ ok: false, error: "code" }, 403);
@@ -228,6 +269,7 @@ async function handle(req, env) {
   }
   if (b && b.action === "translate") return translate(b, env);
   if (b && b.action === "results") return classResults(b, env);
+  if (b && b.action === "names") return names(b, env);
   if (b && b.action === "labstatus") return labStatus(b, env);
   if (b && (b.action === "labopen" || b.action === "labfile" || b.action === "labpoints")) {
     if (!env.TEACHER_CODE) return json({ ok: false, error: "code", detail: "TEACHER_CODE not set" }, 403);
