@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.31.0 — 2026-11-17 (Warsaw · SGGW; the university chooser moved to the Course Book)
+  EC&EE Machine 1.32.0 — 2026-11-17 (Warsaw · SGGW; the university chooser moved to the Course Book)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 1383 perguntas extraídas das aulas PPTX L.00–L.09 (EN) + L.00–L.03 (PT).
 
@@ -264,6 +264,10 @@ code.mono{background:var(--wash);border-color:var(--line2)}
 .ptimer.g{color:var(--good)}.ptimer.y{color:var(--accent)}
 .tbar{background:var(--line2)}
 .leavebanner{background:var(--panel);border:0;border-left:3px solid var(--accent);border-radius:2px;color:var(--ink);font-size:13.5px;padding:.7rem 1rem}
+.sugwrap{position:relative;display:inline-block}
+.sug{position:absolute;left:0;right:0;top:100%;z-index:30;margin:2px 0 0;padding:4px 0;list-style:none;background:var(--panel,#fff);border:1px solid var(--line,#ccc);border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.12);max-height:260px;overflow:auto;min-width:220px}
+.sug li{padding:6px 10px;cursor:pointer;font-size:13px}
+.sug li:hover,.sug li[aria-selected="true"]{background:var(--wash,#f2f2f2)}
 </style>
 </head>
 <body>
@@ -287,7 +291,7 @@ code.mono{background:var(--wash);border-color:var(--line2)}
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.09 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.31.0 · 2026-11-17</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.09 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.32.0 · 2026-11-26</span></footer>
 </main>
 <script>
 "use strict";
@@ -635,7 +639,7 @@ function renderQuiz(){
         <span class="ctl"><label>${esc(t("bank"))}</label><select id="c-lesson"${lockL?" disabled":""}>${lessonOptions(defLesson)}</select></span>
         <span class="ctl"><label>${esc(t("nq"))}</label>
           <select id="c-n">${[20,30,40,50].map(v=>`<option value="${v}"${v===selN?" selected":""}${v>bankSize?" disabled":""}>${v}</option>`).join("")}</select></span>
-        <span class="ctl"><label>${esc(t("name"))}</label><input type="text" id="c-name" name="qm-student-nm" placeholder="—" value="" autocomplete="off" autocorrect="off" autocapitalize="words" spellcheck="false" data-1p-ignore data-lpignore="true" data-form-type="other"></span>
+        <span class="ctl"><label>${esc(t("name"))}</label><span class="sugwrap"><input type="text" id="c-name" name="qm-student-nm" placeholder="—" value="" autocomplete="off" autocorrect="off" autocapitalize="words" spellcheck="false" data-1p-ignore data-lpignore="true" data-form-type="other" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="c-sug"><ul id="c-sug" class="sug" role="listbox" hidden></ul></span></span>
         <span class="ctl"><label>${esc(t("klass"))}</label><select id="c-klass"><option value="">—</option>${groupOptions(selG)}</select></span>
         <label class="chk"><input type="checkbox" id="c-sq" checked> ${esc(t("shufQ"))}</label>
         <label class="chk"><input type="checkbox" id="c-so" checked> ${esc(t("shufO"))}</label>
@@ -682,6 +686,7 @@ function renderQuiz(){
     };
     const gate=()=>{ const v=$("#c-name").value.trim(); $("#c-start").disabled = !LESSON_SEL || lessonBlocked(LESSON_SEL) || !v || /^(https?:\/\/|www\.)/i.test(v) || !$("#c-klass").value; $("#c-warn").textContent=""; };
     $("#c-name").oninput=gate; $("#c-klass").oninput=gate; gate();
+    nameSuggest(gate);
     const cleanName=()=>{ const n=$("#c-name"); if(n && /^(https?:\/\/|www\.)/i.test(n.value.trim())){ n.value=""; gate(); }
       try{ const s=localStorage.getItem("qm_name")||""; if(/^(https?:\/\/|www\.)/i.test(s.trim())) localStorage.removeItem("qm_name"); }catch(e){} };
     [0,400,1200,3000].forEach(ms=>setTimeout(cleanName, ms)); // catches browser autofill / restored junk after load
@@ -867,6 +872,40 @@ async function labSend(k){
       : `${t("clsFail")} (${r.status}${j.error?" "+j.error:""}${j.detail?": "+j.detail:""})`;
   }catch(e){ msg.textContent=await workerDiag(url); }
   btn.disabled=false;
+}
+/* Name suggestions: names already used in earlier attempts (Worker "names"), so each student
+   picks the same spelling every time. One typed letter is enough. */
+function nameSuggest(gate){
+  const inp=$("#c-name"), ul=$("#c-sug"); if(!inp||!ul) return;
+  let timer=0, seq=0, items=[], cur=-1;
+  const close=()=>{ ul.hidden=true; ul.innerHTML=""; items=[]; cur=-1; inp.setAttribute("aria-expanded","false"); };
+  const choose=nm=>{ inp.value=nm; close(); gate(); };
+  const show=list=>{
+    items=list; cur=-1;
+    if(!list.length){ close(); return; }
+    ul.innerHTML=list.map((n,i)=>`<li role="option" id="c-sug-${i}" data-i="${i}">${esc(n)}</li>`).join("");
+    ul.hidden=false; inp.setAttribute("aria-expanded","true");
+    ul.querySelectorAll("li").forEach(li=>li.onmousedown=e=>{ e.preventDefault(); choose(items[+li.dataset.i]); });
+  };
+  inp.addEventListener("input",()=>{
+    clearTimeout(timer); const q=inp.value.trim(), my=++seq;
+    if(!q || !submitURL()){ close(); return; }
+    timer=setTimeout(async()=>{
+      try{
+        const r=await toWorker(submitURL(),{action:"names",q}); const j=await r.json().catch(()=>({}));
+        if(my!==seq) return;
+        show(r.ok && j.ok && Array.isArray(j.list) ? j.list.filter(n=>n!==inp.value.trim()) : []);
+      }catch(e){ if(my===seq) close(); }
+    },200);
+  });
+  inp.addEventListener("keydown",e=>{
+    if(ul.hidden||!items.length) return;
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"){ e.preventDefault(); cur=(cur+(e.key==="ArrowDown"?1:-1)+items.length)%items.length;
+      ul.querySelectorAll("li").forEach((li,i)=>li.setAttribute("aria-selected",String(i===cur))); inp.setAttribute("aria-activedescendant","c-sug-"+cur); }
+    else if(e.key==="Enter"&&cur>=0){ e.preventDefault(); choose(items[cur]); }
+    else if(e.key==="Escape") close();
+  });
+  inp.addEventListener("blur",()=>setTimeout(close,150));
 }
 function startQuiz(){
   const nm=$("#c-name").value.trim(), kg=$("#c-klass").value;
