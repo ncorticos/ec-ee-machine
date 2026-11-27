@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  EC&EE Machine 1.32.0 — 2026-11-17 (Warsaw · SGGW; the university chooser moved to the Course Book)
+  EC&EE Machine 1.33.0 — 2026-11-17 (Warsaw · SGGW; the university chooser moved to the Course Book)
   Conforto Ambiental & Eficiência Energética / Environmental Comfort & Energy Efficiency
   Banco: 1383 perguntas extraídas das aulas PPTX L.00–L.09 (EN) + L.00–L.03 (PT).
 
@@ -38,6 +38,9 @@ header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdro
 .langsel button:last-child,.kindsel button:last-child{border-right:none}
 .langsel button:hover,.kindsel button:hover{color:var(--ink);background:var(--wash)}
 .kindsel+.langsel{margin-left:8px}
+.backbook{flex:0 0 auto;margin-left:auto;font-size:12.5px;font-weight:600;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:.3rem .7rem;min-height:30px;display:inline-flex;align-items:center}
+.backbook:hover,.backbook:focus-visible{color:var(--ink);border-color:var(--accent)}
+.backbook+.kindsel{margin-left:8px}
 .langsel button[aria-pressed="true"],.kindsel button[aria-pressed="true"]{background:var(--ink);color:#fff}
 nav.tabs{border-bottom:1px solid var(--line);background:#fff}
 .tabs-inner{display:flex;gap:2px;padding:0 24px;max-width:1100px;margin:0 auto;overflow-x:auto}
@@ -274,6 +277,7 @@ code.mono{background:var(--wash);border-color:var(--line2)}
 <header>
   <div class="hbar">
     <div class="brand"><b>EC&amp;EE Machine</b><span data-t="brandsub">Environmental Comfort &amp; Energy Efficiency</span></div>
+    <a class="backbook" id="backbook" href="https://claude.ai/artifact/Cd4iRrSW691vtB2RRGgpXw?uni=warsaw&amp;lang=en" title="Back to the Course Book (syllabus); leaves the Machine">← Syllabus</a>
     <div class="kindsel" role="group" id="kindsel">
       <button type="button" data-kind="theory" aria-pressed="true">Theoretical</button>
       <button type="button" data-kind="lab" aria-pressed="false">LAB</button>
@@ -291,7 +295,7 @@ code.mono{background:var(--wash);border-color:var(--line2)}
   <section class="page" id="pg-bank"></section>
   <section class="page" id="pg-res"></section>
   <section class="page" id="pg-lab"></section>
-  <footer><span data-t="foot">Bank extracted from lectures L.00–L.09 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.32.0 · 2026-11-26</span></footer>
+  <footer><span data-t="foot">Bank extracted from lectures L.00–L.09 · each attempt shuffles questions and options · single file, works offline and on GitHub Pages.</span> · <span class="meta" title="Version · release date and time (Lisbon)">v1.33.0 · 2026-11-27</span></footer>
 </main>
 <script>
 "use strict";
